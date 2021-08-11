@@ -6,6 +6,9 @@
         <link rel="stylesheet" href="css/reset.css" />
         <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="css/tela1.css" />
+        <link rel="stylesheet" href="css/tela3.css" />
+
+
         <link rel="icon" type="image/png" href="https://www.google.com/s2/u/0/favicons?domain=buzzfeed.com/quizzes">
 
         <!-- Fontes -->
@@ -32,6 +35,150 @@
                 <ul></ul>
             </section>
         </main>
+
+        <!-- Tela 3 -->
+        <section class="tela3 hidden">
+            <div class="title">
+                <h1>Comece pelo começo</h1>
+            </div>
+
+            <section class="tela3-1 hidden">
+                <div class="content">
+                    <input class="title" type="text" placeholder="Título do seu quizz">
+                    <input class="url" type="text" placeholder="URL da imagem do seu quizz">
+                    <input class="quantity" type="text" placeholder="Quantidade de perguntas do quizz">
+                    <input class="level" type="text" placeholder="Quantidade de níveis do quizz">
+                </div>
+                <div class="container-button">
+                    <button class="continue">Prosseguir para criar perguntas</button>
+                </div>
+            </section>
+
+            <section class="tela3-2 hidden">
+                <div class="content">
+                    <ul>
+                        <li id="question-1" class="">
+                            <div class="holder">
+                                <span> Pergunta 1</span>
+                                <img src="assets/icon-create.png"/>
+                            </div>
+                            <div class="body">
+                                <h2>Pergunta 1</h2>
+                                <div class="input-group no-margin-top main">
+                                    <input class="text" type="text" placeholder="Texto da pergunta">
+                                    <input class="color" type="text" placeholder="Cor de fundo da pergunta">
+                                </div>
+                                <h2>Resposta correta</h2>
+                                <div class="input-group no-margin-top right-answer">
+                                    <input class="text" type="text" placeholder="Resposta correta">
+                                    <input class="url" type="text" placeholder="URL da imagem">
+                                </div>
+                                <h2>Respostas incorreta</h2>
+                                <div class="input-group no-margin-top wrong-answer-1">
+                                    <input class="text" type="text" placeholder="Resposta incorreta 1">
+                                    <input class="url" type="text" placeholder="URL da imagem 1">
+                                </div>
+                                <div class="input-group wrong-answer-2">
+                                    <input class="text" type="text" placeholder="Resposta incorreta 2">
+                                    <input class="url" type="text" placeholder="URL da imagem 2">
+                                </div>
+                                <div class="input-group wrong-answer-3">
+                                    <input class="text" type="text" placeholder="Resposta incorreta 3">
+                                    <input class="url" type="text" placeholder="URL da imagem 3">
+                                </div>
+                            </div>
+                        </li>       
+                        
+                        <li id="question-2" class="collapsed">
+                            <div class="holder">
+                                <span> Pergunta 1</span>
+                                <img src="assets/icon-create.png"/>
+                            </div>
+                            <div class="body">
+                                <h2>Pergunta 1</h2>
+                                <div class="input-group no-margin-top main">
+                                    <input class="text" type="text" placeholder="Texto da pergunta">
+                                    <input class="color" type="text" placeholder="Cor de fundo da pergunta">
+                                </div>
+                                <h2>Resposta correta</h2>
+                                <div class="input-group no-margin-top right-answer">
+                                    <input class="text" type="text" placeholder="Resposta correta">
+                                    <input class="url" type="text" placeholder="URL da imagem">
+                                </div>
+                                <h2>Respostas incorreta</h2>
+                                <div class="input-group no-margin-top wrong-answer-1">
+                                    <input class="text" type="text" placeholder="Resposta incorreta 1">
+                                    <input class="url" type="text" placeholder="URL da imagem 1">
+                                </div>
+                                <div class="input-group wrong-answer-2">
+                                    <input class="text" type="text" placeholder="Resposta incorreta 2">
+                                    <input class="url" type="text" placeholder="URL da imagem 2">
+                                </div>
+                                <div class="input-group wrong-answer-3">
+                                    <input class="text" type="text" placeholder="Resposta incorreta 3">
+                                    <input class="url" type="text" placeholder="URL da imagem 3">
+                                </div>
+                            </div>
+                        </li>  
+                    </ul>
+                    <div class="container-button">
+                        <button class="continue">Prosseguir para criar níveis</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tela3-3 ">
+                <div class="content">
+                    <ul>
+                        <li id="level-1" class="">
+                            <div class="holder">
+                                <span> Nível 1</span>
+                                <img src="assets/icon-create.png"/>
+                            </div>
+                            <div class="body">
+                                <h2>Nível 1</h2>
+                                <div class="input-group no-margin-top main">
+                                    <input class="title" type="text" placeholder="Título do nível">
+                                    <input class="min-percentage" type="text" placeholder="% de acerto mínima">
+                                    <input class="url" type="text" placeholder="URL da imagem do nível">
+                                    <textarea class="description" type="text" placeholder="Descrição do nível"></textarea>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li id="level-2" class="collapsed">
+                            <div class="holder">
+                                <span> Nível 2</span>
+                                <img src="assets/icon-create.png"/>
+                            </div>
+                            <div class="body">
+                                <h2>Nível 1</h2>
+                                <div class="input-group no-margin-top main">
+                                    <input class="title" type="text" placeholder="Título do nível">
+                                    <input class="min-percentage" type="text" placeholder="% de acerto mínima">
+                                    <input class="url" type="text" placeholder="URL da imagem do nível">
+                                    <textarea class="description" type="text" placeholder="Descrição do nível"></textarea>
+                                </div>
+                            </div>
+                        </li>        
+                    </ul>
+                    <div class="container-button">
+                        <button class="continue">Finalizar Quizz</button>
+                    </div>
+                </div>
+     
+            </section>
+
+            <section class="tela3-4 hidden">
+                <div class="container-img">
+                    <img src="assets/example.png" />
+                    <span>O quão Potterhead é você</span>
+                </div>
+                <button class="continue">Acessar Quizz</button>
+                <span class="back">Voltar pra home<span>
+
+            </section>
+        </section>
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
