@@ -14,7 +14,7 @@ button {
     margin-top: 0 !important;
 }
 
-section.tela3 {
+section.screen3 {
     padding-top: 69px;
     display: flex;
     flex-direction: column;
@@ -22,14 +22,14 @@ section.tela3 {
     width: 100%;
 }
 
-section.tela3 section {
+section.screen3 section {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 
-section.tela3 h1{
+section.screen3 h1{
     font-size: 23px;
     font-weight: 700;
     margin-bottom: 0;
@@ -41,7 +41,7 @@ section.tela3 h1{
 }
 
 
-section.tela3 h2 {
+section.screen3 h2 {
     width: 90%;
     padding-top: 27px;
     font-size: 20px;
@@ -49,7 +49,7 @@ section.tela3 h2 {
     margin-bottom: 0;
 }
 
-section.tela3 div.content{
+section.screen3 div.content{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,17 +58,17 @@ section.tela3 div.content{
 }
 
 
-section.tela3 .tela3-1 div.content{
+section.screen3 .screen3-1 div.content{
     background-color: #FFFFFF;
     padding-top: 18px;
     padding-bottom: 24px;
 }
 
-section.tela3 section.tela3-1 div.content{
+section.screen3 section.screen3-1 div.content{
     margin-top: 21px;
 }
 
-section.tela3 div.content input,textarea{ 
+section.screen3 div.content input,textarea{ 
     width: 95%;
     height: 46px;
     margin-top: 9px;
@@ -79,18 +79,18 @@ section.tela3 div.content input,textarea{
     font-size: 19px;
 }
 
-section.tela3 div.input-group {
+section.screen3 div.input-group {
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-top: 23px;
 }
 
-section.tela3 div.input-group input,textarea{
+section.screen3 div.input-group input,textarea{
     width: 100%;
 }
 
-section.tela3 textarea#description{
+section.screen3 textarea#description{
     height: 341px;
     display: flex;
     align-items: flex-start;
@@ -98,7 +98,7 @@ section.tela3 textarea#description{
     text-align: start;
 }
 
-section.tela3 button.continue {
+section.screen3 button.continue {
     height: 50px;
     border: 1px solid #ec362d;
     border-radius: 15px;
@@ -108,20 +108,20 @@ section.tela3 button.continue {
     padding: 0 35px;
 }
 
-section.tela3 button.continue:disabled {
+section.screen3 button.continue:disabled {
     background-color: transparent;
     border: 1px dashed #ec362d;
     color: #ec362d;
 }
 
-section.tela3 ul {
+section.screen3 ul {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
 
-section.tela3 li {
+section.screen3 li {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -131,7 +131,7 @@ section.tela3 li {
 
 }
 
-section.tela3 .holder {
+section.screen3 .holder {
     display: none;
     justify-content: space-between;
     align-items: center;
@@ -141,58 +141,58 @@ section.tela3 .holder {
 
 }
 
-section.tela3 .body {
+section.screen3 .body {
     width: 100%;
 }
 
-section.tela3 .holder span{
+section.screen3 .holder span{
     font-size: 20px;
 }
 
-section.tela3 .holder img{
+section.screen3 .holder img{
     width: 26px;
     height: 23px;
 }
 
-section.tela3 li.collapsed .holder {
+section.screen3 li.collapsed .holder {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
-section.tela3 li.collapsed .body {
+section.screen3 li.collapsed .body {
     display: none;
 }
 
-section.tela3 li.collapsed {
+section.screen3 li.collapsed {
     margin-bottom: 22px;
     padding-bottom: 0;
 
 }
 
-section.tela3 li {
+section.screen3 li {
     padding-bottom: 27px;
     margin-bottom: 24px;
 }
 
-section.tela3 li:last-child {
+section.screen3 li:last-child {
     margin-bottom: 0;
 }
 
-section.tela3 .container-button {
+section.screen3 .container-button {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 150px;
 }
 
-section.tela3 section.tela3-4 {
+section.screen3 section.screen3-4 {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-section.tela3 section.tela3-4 .container-img {
+section.screen3 section.screen3-4 .container-img {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -201,12 +201,12 @@ section.tela3 section.tela3-4 .container-img {
     max-width: 500px;
 }
 
-section.tela3 section.tela3-4 .container-img img {
+section.screen3 section.screen3-4 .container-img img {
     width: 95%;
     border-radius: 5px;
 }
 
-section.tela3 section.tela3-4 .container-img span{
+section.screen3 section.screen3-4 .container-img span{
     position: absolute;
     font-size: 23px;
     color: #FFFFFF;
@@ -214,7 +214,7 @@ section.tela3 section.tela3-4 .container-img span{
     left: 25px;
 }
 
-section.tela3 section.tela3-4 button {
+section.screen3 section.screen3-4 button {
     margin-top: 24px;
     width: 220px;
 }
@@ -239,15 +239,15 @@ font-style: italic;
 }
 
 @media (max-width: 1100px) {
-    section.tela3 h1 {
+    section.screen3 h1 {
         font-size: 20px;
     }
 
-    section.tela3 button.continue{
+    section.screen3 button.continue{
         font-size: 18px;
     }
 
-    section.tela3 section.tela3-4 .container-img span{
+    section.screen3 section.screen3-4 .container-img span{
         font-size: 19px;
     }
 
