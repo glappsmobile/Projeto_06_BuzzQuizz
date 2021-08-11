@@ -1,0 +1,6 @@
+
+function openScreen(window, index){
+ 
+    
+    
+}
