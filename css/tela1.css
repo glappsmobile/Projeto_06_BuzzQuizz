@@ -5,12 +5,12 @@ main {
 section h1 {
     font-size: 20px;
     font-weight: 700;
-    margin-bottom: 10px;
 }
 
-.quizz-list {
+ul {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 10px;
 }
 
 .created-quizzes {
@@ -42,6 +42,19 @@ section h1 {
     border: 1px dashed #ec362d;
     border-radius: 30px;
     font-size: 21px;
+    color: #ec362d;
+    cursor: pointer;
+}
+
+.new-quizz {
+    width: 155px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.new-quizz ion-icon {
+    font-size: 25px;
     color: #ec362d;
     cursor: pointer;
 }
