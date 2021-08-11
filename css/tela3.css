@@ -1,43 +1,75 @@
+.hidden {
+    display: none;
+}
+
+
 section.tela3 {
-    margin: 150px;
+    padding-top: 69px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    background-color: #FFFFFF;
+    width: 100vw;
+    height: 100vh;
 }
 
-section.tela3 div.container-info{
-    display: flex;
-    flex-direction: column;
-}
-
-section.tela3 div.container-button{
+section.tela3 div.title{
     display: flex;
     justify-content: center;
-    margin-top: 60px;
+    align-items: center;
+    background-color: #E5E5E5;
+    width: 100vw;
+    height: 100px;
 }
 
-section.tela3 div h1{
-    margin-top: 30px;
+section.tela3 div.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 21px;
 }
 
-section.tela3 button:disabled {
-    width: 150px;
-    height: 50px;
-    background-color: transparent;
-    border: 1px dashed #ec362d;
-    border-radius: 30px;
-    font-size: 21px;
-    color: #ec362d;
+
+section.tela3 div.content input{ 
+    width: 90%;
+    height: 46px;
+    margin-top: 9px;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 14px;
+    font-size: 19px;
+}
+
+section.tela3 div.content button{ 
+    margin-top: 53px;
 }
 
 section.tela3 button {
-    width: 150px;
     height: 50px;
-    background-color: transparent;
     border: 1px solid #ec362d;
-    border-radius: 30px;
+    border-radius: 15px;
     font-size: 21px;
     color: #FFFFFF;
     background-color: #ec362d;
+    padding: 0 35px;
+}
+
+section.tela3 button:disabled {
+    background-color: transparent;
+    border: 1px dashed #ec362d;
+    color: #ec362d;
+}
+
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    font-style: italic;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+font-style: italic;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+font-style: italic;
 }
 
