@@ -7,7 +7,6 @@
     margin-top: 0 !important;
 }
 
-
 section.tela3 {
     padding-top: 69px;
     display: flex;
@@ -18,7 +17,7 @@ section.tela3 {
     margin-bottom: 50px;
 }
 
-section.tela3 section{
+section.tela3 section {
     padding-bottom: 20px;
 }
 
@@ -32,7 +31,8 @@ section.tela3 h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
+    height: 90px;
+    padding-top: 20px;
 }
 
 section.tela3 h2 {
@@ -44,6 +44,13 @@ section.tela3 div.content{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+
+section.tela3 .tela3-1 div.content{
+    background-color: #FFFFFF;
+    padding-top: 18px;
+    padding-bottom: 24px;
 }
 
 section.tela3 section.tela3-1 div.content{
