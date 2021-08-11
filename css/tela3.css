@@ -1,6 +1,9 @@
+body {
+    background-color: #E5E5E5;
+}
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .no-margin-top {
@@ -13,7 +16,6 @@ section.tela3 {
     flex-direction: column;
     background-color: #E5E5E5;
     width: 100%;
-    height: 100vh;
     margin-bottom: 50px;
 }
 
@@ -87,17 +89,17 @@ section.tela3 textarea#description{
     text-align: start;
 }
 
-section.tela3 button {
+section.tela3 button.continue {
     height: 50px;
     border: 1px solid #ec362d;
     border-radius: 15px;
-    font-size: 21px;
+    font-size: 18px;
     color: #FFFFFF;
     background-color: #ec362d;
     padding: 0 35px;
 }
 
-section.tela3 button:disabled {
+section.tela3 button.continue:disabled {
     background-color: transparent;
     border: 1px dashed #ec362d;
     color: #ec362d;
@@ -156,7 +158,6 @@ section.tela3 li.collapsed {
 
 }
 
-
 section.tela3 li {
     padding-bottom: 27px;
     margin-bottom: 24px;
@@ -173,7 +174,43 @@ section.tela3 .container-button {
     height: 150px;
 }
 
+section.tela3 section.tela3-4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+section.tela3 section.tela3-4 .container-img {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+section.tela3 section.tela3-4 .container-img img {
+    width: 95%;
+}
+
+section.tela3 section.tela3-4 .container-img span{
+    position: absolute;
+    font-size: 19px;
+    color: #FFFFFF;
+    bottom: 17px;
+    left: 25px;
+}
+
+section.tela3 section.tela3-4 button {
+    margin-top: 24px;
+    width: 220px;
+}
+
+span.back {
+    margin-top: 24px;
+    font-size: 18px;
+    color: #818181;
+    cursor: pointer;
+}
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     font-style: italic;
