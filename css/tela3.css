@@ -57,7 +57,7 @@ section.tela3 section.tela3-1 div.content{
     margin-top: 21px;
 }
 
-section.tela3 div.content input{ 
+section.tela3 div.content input,textarea{ 
     width: 90%;
     height: 46px;
     margin-top: 9px;
@@ -75,8 +75,16 @@ section.tela3 div.input-group {
     margin-top: 23px;
 }
 
-section.tela3 div.input-group input{
+section.tela3 div.input-group input,textarea{
     width: 100%;
+}
+
+section.tela3 textarea#description{
+    height: 341px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: start;
 }
 
 section.tela3 button {
@@ -164,6 +172,7 @@ section.tela3 .container-button {
     align-items: center;
     height: 150px;
 }
+
 
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
