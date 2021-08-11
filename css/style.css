@@ -26,3 +26,7 @@ header h1 {
     font-weight: 700;
     color: #ffffff;
 }
+
+.hidden {
+    display: none;
+}
