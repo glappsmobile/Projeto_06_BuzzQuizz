@@ -1,24 +1,14 @@
-const VISIBILITY = Object.freeze({
-    VISIBLE: false,
-    HIDDEN: true,
-})
-
 function closeAllScreens(){
-    const screenCount = 3;
+    const screens = document.querySelectorAll(".screen");
+    const subscreens = document.querySelectorAll(".subscreen");
 
-    for (let i = 0; i < screenCount; i++){
-        const screen = document.querySelector(`.screen${i+1}`);
+    screens.forEach(screen => {
+        screen.classList.add("hidden"); 
+    });
 
-        if (screen !== null) { 
-            screen.classList.add("hidden"); 
-            toggleAllSections(screen, VISIBILITY.HIDDEN);
-        }
-    }
-}
-
-function toggleAllSections(view, newVisibility){
-    const sections = view.querySelectorAll("section");
-    if (sections.length > 0) { sections.forEach( section => section.classList.toggle("hidden", newVisibility)); }
+    subscreens.forEach(subscreen => {
+        subscreen.classList.add("hidden"); 
+    });
 }
 
 function openScreen(screenIndex, screenSectionIndex){
@@ -28,11 +18,8 @@ function openScreen(screenIndex, screenSectionIndex){
 
     if (screen !== null){
         screen.classList.remove("hidden");
+
         const section = screen.querySelector(`.section${screenSectionIndex}`);
-
-        if (screenIndex === 1) {toggleAllSections(screen, VISIBILITY.VISIBLE);}
-        else { toggleAllSections(screen, VISIBILITY.HIDDEN); }
-
         if (section !== null){ section.classList.remove("hidden"); }
 
     }
@@ -41,3 +28,4 @@ function openScreen(screenIndex, screenSectionIndex){
     //E depois vai tirar o hidden da screen3 e da section2 dentro da screen3
 }
 
+openScreen(3,1)
