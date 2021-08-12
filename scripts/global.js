@@ -5,7 +5,7 @@ let quizzes;
 function renderCreatedQuizzes() {
     const id_created = JSON.parse(localStorage.getItem("id"));
 
-    const created = document.querySelector(".screen1 .created-quizzes");
+    const created = document.querySelector(".screen-quizz-list .created-quizzes");
 
     if ( id_created !== null ) {
         const no_created_quizz = created.querySelector(".no-created-quizz");
@@ -32,7 +32,7 @@ function renderCreatedQuizzes() {
 function renderQuizzes() {
     renderCreatedQuizzes();
 
-    const all_quizzes_list = document.querySelector(".screen1 .all-quizzes ul");
+    const all_quizzes_list = document.querySelector(".screen-quizz-list .all-quizzes ul");
 
     for ( let i = 0; i < quizzes.length; i++ ) {
         all_quizzes_list.innerHTML += `<li class="quizz">

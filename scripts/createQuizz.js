@@ -1,31 +1,58 @@
+const SCREENS = {
+    QUIZZ_LIST: "screen-quizz-list",
+    CREATE_QUIZZ: "screen-create-quizz"
+}
+
+const SUBSCREENS = {
+    CREATE_BASIC: "subscreen-create-basic",
+    CREATE_QUESTIONS: "subscreen-create-questions",
+    CREATE_LEVELS: "subscreen-create-levels",
+    CREATE_SUCCESS: "subscreen-create-success"
+}
+
+const VISIBILITY = {
+    VISIBLE: false,
+    HIDDEN: true
+}
+
+const current = {
+    screen: SCREENS.QUIZZ_LIST,
+    subscreen: ""
+}
+
 function closeAllScreens(){
-    const screens = document.querySelectorAll(".screen");
-    const subscreens = document.querySelectorAll(".subscreen");
-
-    screens.forEach(screen => {
-        screen.classList.add("hidden"); 
-    });
-
-    subscreens.forEach(subscreen => {
-        subscreen.classList.add("hidden"); 
-    });
+    document.querySelectorAll(".screen").forEach(screen => screen.classList.add("hidden"));
 }
 
-function openScreen(screenIndex, screenSectionIndex){
-    closeAllScreens()
+function closeAllSubscreens(){
+    document.querySelectorAll(".subscreen").forEach(screen => screen.classList.add("hidden"));
+}
 
-    const screen = document.querySelector(`.screen${screenIndex}`);
+function openScreen(classIdentifier){
+    const screen = document.querySelector(`.${classIdentifier}`);
 
-    if (screen !== null){
+    if (screen !== null){ 
+        closeAllScreens()
+        current.screen = classIdentifier;
         screen.classList.remove("hidden");
-
-        const section = screen.querySelector(`.section${screenSectionIndex}`);
-        if (section !== null){ section.classList.remove("hidden"); }
-
+    } else {
+        console.error(`A SCREEN ${classIdentifier} NÃO EXISTE.`);
     }
-
-    //Se der um openScreen(3, 2) por exemplo, vai esconder todas as screens, todas as sections dentro das screens
-    //E depois vai tirar o hidden da screen3 e da section2 dentro da screen3
 }
 
-openScreen(3,1)
+function openSubscreen(classIdentifier){
+    const subscreen = document.querySelector(`.${classIdentifier}`);
+
+    if (screen !== null){ 
+        closeAllSubscreens();
+        current.subscreen = classIdentifier;
+        subscreen.classList.remove("hidden");
+    } else {
+        console.error(`A SUBSCREEN ${classIdentifier} NÃO EXISTE.`);
+    }
+}
+
+function goToCreateQuizz(){
+    openScreen(SCREENS.CREATE_QUIZZ);
+    openSubscreen(SUBSCREENS.CREATE_BASIC);
+}
