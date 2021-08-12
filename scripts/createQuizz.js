@@ -27,3 +27,4 @@ function openScreen(screenIndex, screenSectionIndex){
     //Se der um openScreen(3, 2) por exemplo, vai esconder todas as screens, todas as sections dentro das screens
     //E depois vai tirar o hidden da screen3 e da section2 dentro da screen3
 }
+
