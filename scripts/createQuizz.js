@@ -19,7 +19,7 @@ function goToCreateQuizz(){
     openScreen(SCREENS.CREATE_QUIZZ);
     openSubscreen(SUBSCREENS.CREATE_BASIC);
 }
-goToCreateQuizz()
+
 function goToQuizzList(){
     openScreen(SCREENS.QUIZZ_LIST);
 }
