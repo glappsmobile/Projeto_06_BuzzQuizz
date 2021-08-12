@@ -64,7 +64,7 @@ section.screen-create-quizz .subscreen-create-basic div.content{
     padding-bottom: 24px;
 }
 
-section.screen-create-quizz section.subscreen-create-basic div.content{
+section.screen-create-quizz .subscreen-create-basic div.content{
     margin-top: 21px;
 }
 
@@ -186,13 +186,13 @@ section.screen-create-quizz .container-button {
     height: 150px;
 }
 
-section.screen-create-quizz section.subscreen-create-success {
+section.screen-create-quizz .subscreen-create-success {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-section.screen-create-quizz section.subscreen-create-success .container-img {
+section.screen-create-quizz .subscreen-create-success .container-img {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -201,7 +201,7 @@ section.screen-create-quizz section.subscreen-create-success .container-img {
     max-width: 500px;
 }
 
-section.screen-create-quizz section.subscreen-create-success .container-img img {
+section.screen-create-quizz .subscreen-create-success .container-img img {
     width: 100%;
     border-radius: 5px;
 }
@@ -216,7 +216,7 @@ section.screen-create-quizz .gradient {
     border-radius: 5px;
 }
 
-section.screen-create-quizz section.subscreen-create-success .container-img span{
+section.screen-create-quizz .subscreen-create-success .container-img span{
     position: absolute;
     font-size: 23px;
     color: #FFFFFF;
@@ -224,7 +224,7 @@ section.screen-create-quizz section.subscreen-create-success .container-img span
     left: 25px;
 }
 
-section.screen-create-quizz section.subscreen-create-success button {
+section.screen-create-quizz .subscreen-create-success button {
     margin-top: 24px;
     width: 220px;
 }
@@ -257,7 +257,7 @@ font-style: italic;
         font-size: 18px;
     }
 
-    section.screen-create-quizz section.subscreen-create-success .container-img span{
+    section.screen-create-quizz .subscreen-create-success .container-img span{
         font-size: 19px;
     }
 
