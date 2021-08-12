@@ -1,6 +1,58 @@
 const API_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v3/buzzquizz/quizzes";
 
+const SCREENS = {
+    QUIZZ_LIST: "screen-quizz-list",
+    CREATE_QUIZZ: "screen-create-quizz"
+}
+
+const SUBSCREENS = {
+    CREATE_BASIC: "subscreen-create-basic",
+    CREATE_QUESTIONS: "subscreen-create-questions",
+    CREATE_LEVELS: "subscreen-create-levels",
+    CREATE_SUCCESS: "subscreen-create-success"
+}
+
+const current = {
+    screen: SCREENS.QUIZZ_LIST,
+    subscreen: ""
+}
+
 let quizzes;
+
+function closeAllScreens(){
+    current.screen = "";
+    document.querySelectorAll(".screen").forEach(screen => screen.classList.add("hidden"));
+}
+
+function closeAllSubscreens(){
+    current.subscreen = "";
+    document.querySelectorAll(".subscreen").forEach(screen => screen.classList.add("hidden"));
+}
+
+function openScreen(classIdentifier){
+    const screen = document.querySelector(`.${classIdentifier}`);
+
+    if (screen !== null){ 
+        closeAllScreens()
+        current.screen = classIdentifier;
+        screen.classList.remove("hidden");
+    } else {
+        console.error(`A SCREEN ${classIdentifier} NÃO EXISTE.`);
+    }
+}
+
+function openSubscreen(classIdentifier){
+    const subscreen = document.querySelector(`.${classIdentifier}`);
+
+    if (screen !== null){ 
+        closeAllSubscreens();
+        current.subscreen = classIdentifier;
+        subscreen.classList.remove("hidden");
+    } else {
+        console.error(`A SUBSCREEN ${classIdentifier} NÃO EXISTE.`);
+    }
+}
+
 
 function renderCreatedQuizzes() {
     const id_created = JSON.parse(localStorage.getItem("id"));
