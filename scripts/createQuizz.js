@@ -1,3 +1,8 @@
+const VISIBILITY = Object.freeze({
+    VISIBLE: false,
+    HIDDEN: true,
+})
+
 function closeAllScreens(){
     const screenCount = 3;
 
@@ -6,10 +11,14 @@ function closeAllScreens(){
 
         if (screen !== null) { 
             screen.classList.add("hidden"); 
-            const sections = screen.querySelectorAll("section");
-            if (sections.length > 0) { sections.forEach( section => section.classList.add("hidden")); }
+            toggleAllSections(screen, VISIBILITY.HIDDEN);
         }
     }
+}
+
+function toggleAllSections(view, newVisibility){
+    const sections = view.querySelectorAll("section");
+    if (sections.length > 0) { sections.forEach( section => section.classList.toggle("hidden", newVisibility)); }
 }
 
 function openScreen(screenIndex, screenSectionIndex){
@@ -21,7 +30,11 @@ function openScreen(screenIndex, screenSectionIndex){
         screen.classList.remove("hidden");
         const section = screen.querySelector(`.section${screenSectionIndex}`);
 
+        if (screenIndex === 1) {toggleAllSections(screen, VISIBILITY.VISIBLE);}
+        else { toggleAllSections(screen, VISIBILITY.HIDDEN); }
+
         if (section !== null){ section.classList.remove("hidden"); }
+
     }
 
     //Se der um openScreen(3, 2) por exemplo, vai esconder todas as screens, todas as sections dentro das screens
