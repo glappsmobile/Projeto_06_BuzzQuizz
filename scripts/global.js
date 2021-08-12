@@ -11,10 +11,21 @@ function renderCreatedQuizzes() {
         const no_created_quizz = created.querySelector(".no-created-quizz");
         no_created_quizz.classList.add("hidden");
 
-        element.innerHTML = `<div class="new-quizz"><h1>Seus Quizzes</h1><ion-icon name="add-circle" onclick="openScreen(3, 1)"></ion-icon></div><ul>`;
+        created.innerHTML = `<div class="new-quizz"><h1>Seus Quizzes</h1><ion-icon name="add-circle" onclick="openScreen(3, 1)"></ion-icon></div><ul></ul>`;
+        
+        const created_list = created.querySelector("ul");
 
-        //Procurar os ids do localStorage que estão no array quizzes
-        //element.innerHTML += </ul>; //ao fim do for
+        for ( let i = 0; i < id_created.length; i++ ) {
+            for ( let j = 0; j < quizzes.length; j++ ) {
+                if ( id_created[i] === quizzes[j].id ) {
+                    created_list.innerHTML += `<li class="quizz">
+                    <img src="${quizzes[i].image}" />
+                    <div class="gradient"></div>
+                    <span class="title">${quizzes[i].title}</span>
+                    </li>`
+                }
+            }
+        }
     }
 }
 
