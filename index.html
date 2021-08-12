@@ -42,7 +42,7 @@
                 <h1>Comece pelo começo</h1>
             </div>
 
-            <section class="subscreen subscreen-create-basic ">
+            <section class="subscreen subscreen-create-basic hidden">
                 <div class="content">
                     <input class="title" type="text" placeholder="Título do seu quizz">
                     <input class="url" type="text" placeholder="URL da imagem do seu quizz">
@@ -50,7 +50,7 @@
                     <input class="level" type="text" placeholder="Quantidade de níveis do quizz">
                 </div>
                 <div class="container-button">
-                    <button onclick="openScreen(3,2)" class="continue">Prosseguir para criar perguntas</button>
+                    <button onclick="goToNextPage()" class="continue">Prosseguir para criar perguntas</button>
                 </div>
             </section>
 
@@ -122,7 +122,7 @@
                         </li>  
                     </ul>
                     <div class="container-button">
-                        <button onclick="openScreen(3,3)" class="continue">Prosseguir para criar níveis</button>
+                        <button onclick="goToNextPage()" class="continue">Prosseguir para criar níveis</button>
                     </div>
                 </div>
             </section>
@@ -163,7 +163,7 @@
                         </li>        
                     </ul>
                     <div class="container-button">
-                        <button onclick="openScreen(3,4)" class="continue">Finalizar Quizz</button>
+                        <button onclick="goToNextPage()" class="continue">Finalizar Quizz</button>
                     </div>
                 </div>
      
@@ -176,7 +176,7 @@
                     <span>O quão Potterhead é você</span>
                 </div>
                 <button class="continue">Acessar Quizz</button>
-                <span onclick="openScreen(1,1)" class="back">Voltar pra home<span>
+                <span onclick="goToQuizzList()" class="back">Voltar pra home<span>
 
             </section>
         </section>
