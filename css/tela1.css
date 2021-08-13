@@ -33,6 +33,7 @@ main .created-quizzes .no-created-quizz span {
     font-weight: 400;
     color: #b9b9b9;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 main .created-quizzes .no-created-quizz button {
@@ -98,4 +99,19 @@ main section .quizz .title {
 
 .hidden {
     display: none;
+}
+
+@media (max-width: 1100px) {
+    main {
+        margin: 150px 30px;
+    }
+
+    main section .quizz, main section .quizz .gradient{
+        width: 100%;
+        margin: 0 0 10px;
+    }
+
+    main .created-quizzes .new-quizz {
+        width: 100%;
+    }
 }
