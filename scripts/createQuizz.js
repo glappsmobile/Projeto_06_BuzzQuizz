@@ -1,5 +1,13 @@
 const quizzInCreation = {}
+
 const SHOW_ERROR = true;
+
+const TOP_TEXTS = {
+    CREATE_BASIC: "Comece pelo começo",
+    CREATE_QUESTIONS: "Crie suas perguntas",
+    CREATE_LEVELS: "Agora, decida os níveis!",
+    CREATE_SUCCESS: "Seu quizz está pronto!"
+}
 
 function setInputError(input, errorMessage){
     let parent = input.parentElement;
@@ -198,6 +206,7 @@ function renderCreateQuestionForm(quantityQuestions){
 function postQuizz(){
     axios.post(API_URL, quizzInCreation)
     .then(response => {
+        const textTop = document.querySelector(`.${SCREENS.CREATE_QUIZZ} .title h1`);
         const currentId = response.data.id;
         const previousIds = localStorage.getItem("id"); 
         let arrIds = [];
@@ -210,6 +219,8 @@ function postQuizz(){
         localStorage.setItem("id", JSON.stringify(arrIds));
 
         openSubscreen(SUBSCREENS.CREATE_SUCCESS);
+        textTop.innerHTML = TOP_TEXTS.CREATE_SUCCESS;
+
         console.log(response);
     })
     .catch(error => console.error(error)); 
@@ -217,6 +228,7 @@ function postQuizz(){
 
 function goToNextPage(){
     const screen = document.querySelector(`.${current.screen}`);
+    const textTop = screen.querySelector(".title h1");
 
     if (current.screen === SCREENS.CREATE_QUIZZ){
         const subscreen = screen.querySelector(`.${current.subscreen}`);
@@ -239,6 +251,7 @@ function goToNextPage(){
                 quizzInCreation.image = url.value;
                 renderCreateQuestionForm(Number(quantityQuestions.value));
                 renderCreateLevelsForm(Number(quantityLevels.value));
+                textTop.innerHTML = TOP_TEXTS.CREATE_QUESTIONS;
                 openSubscreen(SUBSCREENS.CREATE_QUESTIONS);
             }
             return;
@@ -297,6 +310,7 @@ function goToNextPage(){
             const isValid = subscreen.querySelectorAll("input.invalid").length === 0;
 
             if (isValid){
+                textTop.innerHTML = TOP_TEXTS.CREATE_LEVELS;
                 openSubscreen(SUBSCREENS.CREATE_LEVELS);
             }
 
@@ -332,7 +346,6 @@ function goToNextPage(){
             const isValid = subscreen.querySelectorAll("input.invalid").length === 0 && hasLevelZero;
 
             if (!hasLevelZero) {alert("Pelo menos 1 nível precisa ter porcentagem 0");}
-            console.log(quizzInCreation);
 
             if (isValid){
                 postQuizz();
