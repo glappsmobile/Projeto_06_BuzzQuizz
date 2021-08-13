@@ -38,6 +38,7 @@ function openScreen(classIdentifier){
         closeAllScreens()
         current.screen = classIdentifier;
         screen.classList.remove("hidden");
+        screen.scrollIntoView();
     } else {
         console.error(`A SCREEN ${classIdentifier} NÃO EXISTE.`);
     }
