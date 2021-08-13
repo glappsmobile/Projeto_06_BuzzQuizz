@@ -5,12 +5,17 @@ function renderQuestions(){
     const bannerImg = banner.querySelector("img");
     const bannerTxt = banner.querySelector("h1");
 
+    const black = "#000000";
+    const white = "#FFFFFF";
+
     bannerImg.src = thisQuizz.image;
     bannerTxt.innerHTML = thisQuizz.title;
     thisQuizz.questions.forEach(question => {
+
+        const textColor = (isHexColorBright(question.color)) ? black : white;
         list.innerHTML += `
         <li class="question">
-            <div class="title" style="background-color: ${question.color}">${question.title}</div>
+            <div class="title" style="color: ${textColor}; background-color: ${question.color}">${question.title}</div>
             <div class="options">
                 <div class="option">
                     <div class="option-img">

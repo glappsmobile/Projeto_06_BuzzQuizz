@@ -44,10 +44,17 @@ section.screen-quizz-questions .question .title {
     height: 100px;
     font-size: 23px;
     font-weight: 700;
-    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+section.screen-quizz-questions .question .title.black {
+    color: #000000;
+}
+
+section.screen-quizz-questions .question .title.white {
+    color: #ffffff;
 }
 
 section.screen-quizz-questions .question .options {
