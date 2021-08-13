@@ -1,4 +1,4 @@
-section.screen-quizz-questions .banner {
+.screen-quizz-questions .banner {
     margin: 70px 0 0;
     width: 100%;
     height: 200px;
@@ -9,18 +9,18 @@ section.screen-quizz-questions .banner {
     margin-bottom: 50px;
 }
 
-section.screen-quizz-questions .banner img {
+.screen-quizz-questions .banner img {
     width: 100%;
 }
 
-section.screen-quizz-questions .black {
+.screen-quizz-questions .black {
     width: 100%;
     height: 100%;
     background-color: rgba(0,0,0,0.6);
     position: absolute;
 }
 
-section.screen-quizz-questions h1 {
+.screen-quizz-questions h1 {
     font-size: 39px;
     font-weight: 400;
     width: 100%;
@@ -30,7 +30,7 @@ section.screen-quizz-questions h1 {
     position: absolute;
 }
 
-section.screen-quizz-questions .question {
+.screen-quizz-questions .question {
     width: 760px;
     background-color: #ffffff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
@@ -38,7 +38,7 @@ section.screen-quizz-questions .question {
     padding: 30px;
 }
 
-section.screen-quizz-questions .question .title {
+.screen-quizz-questions div.title {
     background-color: #434ca0;
     width: 100%;
     height: 100px;
@@ -49,27 +49,27 @@ section.screen-quizz-questions .question .title {
     align-items: center;
 }
 
-section.screen-quizz-questions .question .title.black {
+.screen-quizz-questions .question .title.black {
     color: #000000;
 }
 
-section.screen-quizz-questions .question .title.white {
+.screen-quizz-questions .question .title.white {
     color: #ffffff;
 }
 
-section.screen-quizz-questions .question .options {
+.screen-quizz-questions .question .options {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
 }
 
-section.screen-quizz-questions .question .options .option {
+.screen-quizz-questions .question .options .option {
     width: 330px;
     margin-top: 20px;
 }
 
-section.screen-quizz-questions .question .option-img {
+.screen-quizz-questions .question .option-img {
     width: 100%;
     height: 175px;
     overflow: hidden;
@@ -78,23 +78,39 @@ section.screen-quizz-questions .question .option-img {
     margin-bottom: 10px;
 }
 
-section.screen-quizz-questions .question .option-img img {
+.screen-quizz-questions .question .option-img img {
     width: 100%;
 }
 
-section.screen-quizz-questions .question .options .option span {
+.screen-quizz-questions .question .options .option span {
     font-size: 20px;
     font-weight: 700;
 }
 
-section.screen-quizz-questions .question .options .option.wrong {
+.screen-quizz-questions .question .options .option.wrong {
     color: #FF4B4B;
 }
 
-section.screen-quizz-questions .question .options .option.right {
+.screen-quizz-questions .question .options .option.right {
     color: #009C22;
 }
 
-section.screen-quizz-questions .question .options .option.blur {
+.screen-quizz-questions .question .options .option.blur {
     opacity: 0.3;
+}
+
+.screen-quizz-questions .result-box {
+    padding-top: 18px;
+    display: flex;
+}
+
+.screen-quizz-questions .result img {
+    width: 330px;
+    margin-right: 21px;
+}
+
+.screen-quizz-questions .result p {
+    font-weight: 700;
+    font-size: 19px;
+    color: #484848;
 }
