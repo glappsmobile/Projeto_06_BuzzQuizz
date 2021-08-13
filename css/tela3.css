@@ -93,7 +93,7 @@ button {
     font-size: 19px;
 }
 
-input.invalid{
+input.invalid,textarea.invalid{
     background-color: #FFE9E9;
 }
 
@@ -112,7 +112,7 @@ input.invalid{
     width: 100%;
 }
 
-.screen-create-quizz textarea.description{
+.screen-create-quizz .description textarea{
     height: 341px;
     display: flex;
     align-items: flex-start;
