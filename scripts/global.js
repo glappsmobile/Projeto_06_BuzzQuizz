@@ -19,6 +19,7 @@ const current = {
 }
 
 let quizzes;
+let thisQuizz = [];
 
 function closeAllScreens(){
     current.screen = "";
@@ -113,11 +114,22 @@ function getQuizzes() {
 
 getQuizzes();
 
-function openQuizz(element) {
-    const promise = axios.get(API_URL + `/${element.id}`);
+function randomSorter(){
+    return Math.random() - 0.5;
+}
 
-    promise.then(function (object) {
+function sortQuizzQuestions(){
+    thisQuizz.questions.forEach((question, i) => {
+        thisQuizz.questions[i].answers.sort(randomSorter);
+    });
+}
+
+function openQuizz(element) {
+    const promise = axios.get(`${API_URL}/${element.id}`)
+    .then(response => {
         openScreen(SCREENS.QUIZZ_QUESTIONS); 
-        renderQuestions(object.data) 
+        thisQuizz = response.data;
+        sortQuizzQuestions();
+        renderQuestions() 
     });
 }

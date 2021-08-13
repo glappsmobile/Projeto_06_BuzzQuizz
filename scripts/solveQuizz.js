@@ -1,14 +1,13 @@
-function renderQuestions(quizz){
-    console.log(quizz);
+function renderQuestions(){
     const screen = document.querySelector(`.${SCREENS.QUIZZ_QUESTIONS}`);
     const list = screen.querySelector("ul.questions");
     const banner = screen.querySelector(".banner");
     const bannerImg = banner.querySelector("img");
     const bannerTxt = banner.querySelector("h1");
 
-    bannerImg.src = quizz.image;
-    bannerTxt.innerHTML = quizz.title;
-    quizz.questions.forEach(question => {
+    bannerImg.src = thisQuizz.image;
+    bannerTxt.innerHTML = thisQuizz.title;
+    thisQuizz.questions.forEach(question => {
         list.innerHTML += `
         <li class="question">
             <div class="title" style="background-color: ${question.color}">${question.title}</div>
@@ -41,7 +40,5 @@ function renderQuestions(quizz){
         </li>
         `
     });
-
-
 }
 
