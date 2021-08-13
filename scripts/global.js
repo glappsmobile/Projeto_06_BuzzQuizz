@@ -112,16 +112,8 @@ function getQuizzes() {
 
 getQuizzes();
 
-function searchQuizz(element) {
-    for ( let i = 0; i < quizzes.length; i++ ) {
-        if ( quizzes[i].id === Number(element.id) ) {
-            return quizzes[i];
-        }
-    }
-}
-
 function openQuizz(element) {
-    const quizz = searchQuizz(element);
+    const promise = axios.get(API_URL + `/${element.id}`);
 
-    console.log(quizz);
+    promise.then(function (object) {console.log(object.data)});
 }
