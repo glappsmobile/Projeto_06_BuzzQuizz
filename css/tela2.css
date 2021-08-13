@@ -1,0 +1,81 @@
+section.screen-quizz-questions .banner {
+    margin: 70px 0 0;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+section.screen-quizz-questions .banner img {
+    width: 100%;
+}
+
+section.screen-quizz-questions .black {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    position: absolute;
+}
+
+section.screen-quizz-questions h1 {
+    font-size: 39px;
+    font-weight: 400;
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    margin: 0 auto;
+    position: absolute;
+}
+
+section.screen-quizz-questions section.question {
+    width: 760px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    margin: 0 auto 50px;
+    padding: 30px;
+}
+
+section.screen-quizz-questions section.question .title {
+    background-color: #434ca0;
+    width: 100%;
+    height: 100px;
+    font-size: 23px;
+    font-weight: 700;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section.screen-quizz-questions section.question .options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+section.screen-quizz-questions section.question .options .option {
+    width: 330px;
+    margin-top: 20px;
+}
+
+section.screen-quizz-questions section.question .option-img {
+    width: 100%;
+    height: 175px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+section.screen-quizz-questions section.question .option-img img {
+    width: 100%;
+}
+
+section.screen-quizz-questions section.question .options .option span {
+    font-size: 20px;
+    font-weight: 700;
+}
