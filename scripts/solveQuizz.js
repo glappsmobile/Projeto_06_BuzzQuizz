@@ -1,7 +1,21 @@
 let rightAnswers = 0;
 
+function nextQuestion() {
+    const questions = document.querySelectorAll("li.question");
+
+    for ( let i = 0; i < questions.length; i++ ) {
+        const options = questions[i].querySelector(".options");
+
+        if (!options.classList.contains("answered")) {
+            questions[i].scrollIntoView({block: "end", behavior: "smooth"});
+            break;
+        }
+    }
+}
+
 function correctQuestion(chosenOption, indexQuestion){
     const question = chosenOption.parentElement;
+    question.classList.add("answered");
     const options = question.querySelectorAll(".option");
 
     options.forEach((option, indexOption) => {
@@ -15,6 +29,7 @@ function correctQuestion(chosenOption, indexQuestion){
     });
 
     chosenOption.classList.remove("blur");
+    setTimeout(nextQuestion, 2000);
 }
 
 function renderQuestions(){
