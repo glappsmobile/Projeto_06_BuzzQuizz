@@ -82,14 +82,14 @@ function renderQuizzes() {
         }
 
         if ( is_created ) {
-            created_list.innerHTML += `<li class="quizz">
+            created_list.innerHTML += `<li class="quizz" id="${quizzes[i].id}" onclick="openQuizz(this);">
                     <img src="${quizzes[i].image}" />
                     <div class="gradient"></div>
                     <span class="title">${quizzes[i].title}</span>
                 </li>`
         }
         else {
-            all_quizzes_list.innerHTML += `<li class="quizz">
+            all_quizzes_list.innerHTML += `<li class="quizz" id="${quizzes[i].id}" onclick="openQuizz(this);">
                     <img src="${quizzes[i].image}" />
                     <div class="gradient"></div>
                     <span class="title">${quizzes[i].title}</span>
@@ -111,3 +111,9 @@ function getQuizzes() {
 }
 
 getQuizzes();
+
+function openQuizz(element) {
+    const promise = axios.get(API_URL + `/${element.id}`);
+
+    promise.then(function (object) {console.log(object.data)});
+}
