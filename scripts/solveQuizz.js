@@ -1,7 +1,10 @@
 let rightAnswers = 0;
 
+const isQuizFinished = () => document.querySelectorAll(".answered").length === thisQuizz.questions.length;
+
 function correctQuestion(chosenOption, indexQuestion){
     const question = chosenOption.parentElement;
+    question.classList.add("answered");
     const options = question.querySelectorAll(".option");
 
     options.forEach((option, indexOption) => {
@@ -14,7 +17,7 @@ function correctQuestion(chosenOption, indexQuestion){
         if (isCorrect && option === chosenOption) { rightAnswers++; }
     });
 
-    chosenOption.classList.remove("blur");
+   chosenOption.classList.remove("blur");
 }
 
 function renderQuestions(){
