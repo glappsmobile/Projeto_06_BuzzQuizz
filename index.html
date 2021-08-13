@@ -44,25 +44,27 @@
 
             <section class="subscreen subscreen-create-basic hidden">
                 <div class="content">
-                    <div class="title input-container">
-                        <span class="error"></span>
-                        <input type="text" onblur="inputMinLengthCheck(this, 20);" maxlength="65" placeholder="Título do seu quizz">
-                    </div> 
+                    <div class="form">
+                        <div class="title input-container">
+                            <span class="error"></span>
+                            <input type="text" onblur="inputMinLengthCheck(this, 20);" maxlength="65" placeholder="Título do seu quizz">
+                        </div> 
 
-                    <div class="url input-container">
-                        <span class="error"></span>
-                        <input type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem do seu quizz">
-                    </div> 
+                        <div class="url input-container">
+                            <span class="error"></span>
+                            <input type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem do seu quizz">
+                        </div> 
 
-                    <div class="quantity-questions input-container">
-                        <span class="error"></span>
-                        <input type="number" onblur="inputNumberCheck(this, 3, 10);" maxlength="2" placeholder="Quantidade de perguntas do quizz">
-                    </div> 
+                        <div class="quantity-questions input-container">
+                            <span class="error"></span>
+                            <input type="number" onblur="inputNumberCheck(this, 3, 10);" maxlength="2" placeholder="Quantidade de perguntas do quizz">
+                        </div> 
 
-                    <div class="quantity-levels input-container">
-                        <span class="error"></span>
-                        <input type="number" onblur="inputNumberCheck(this, 2, 10);" maxlength="2"  placeholder="Quantidade de níveis do quizz">
-                    </div> 
+                        <div class="quantity-levels input-container">
+                            <span class="error"></span>
+                            <input type="number" onblur="inputNumberCheck(this, 2, 10);" maxlength="2"  placeholder="Quantidade de níveis do quizz">
+                        </div> 
+                    </div>
                 </div>
 
                 <div class="container-button">
@@ -72,71 +74,7 @@
 
             <section class="subscreen subscreen-create-questions hidden">
                 <div class="content">
-                    <ul>
-                        <li id="question-1" class="">
-                            <div class="holder">
-                                <span> Pergunta 1</span>
-                                <img src="assets/icon-create.png"/>
-                            </div>
-                            <div class="body">
-                                <h2>Pergunta 1</h2>
-                                <div class="input-group no-margin-top main">
-                                    <input class="text" type="text" placeholder="Texto da pergunta">
-                                    <input class="color" type="text" placeholder="Cor de fundo da pergunta">
-                                </div>
-                                <h2>Resposta correta</h2>
-                                <div class="input-group no-margin-top right-answer">
-                                    <input class="text" type="text" placeholder="Resposta correta">
-                                    <input class="url" type="text" placeholder="URL da imagem">
-                                </div>
-                                <h2>Respostas incorreta</h2>
-                                <div class="input-group no-margin-top wrong-answer-1">
-                                    <input class="text" type="text" placeholder="Resposta incorreta 1">
-                                    <input class="url" type="text" placeholder="URL da imagem 1">
-                                </div>
-                                <div class="input-group wrong-answer-2">
-                                    <input class="text" type="text" placeholder="Resposta incorreta 2">
-                                    <input class="url" type="text" placeholder="URL da imagem 2">
-                                </div>
-                                <div class="input-group wrong-answer-3">
-                                    <input class="text" type="text" placeholder="Resposta incorreta 3">
-                                    <input class="url" type="text" placeholder="URL da imagem 3">
-                                </div>
-                            </div>
-                        </li>       
-                        
-                        <li id="question-2" class="collapsed">
-                            <div class="holder">
-                                <span> Pergunta 1</span>
-                                <img src="assets/icon-create.png"/>
-                            </div>
-                            <div class="body">
-                                <h2>Pergunta 1</h2>
-                                <div class="input-group no-margin-top main">
-                                    <input class="text" type="text" placeholder="Texto da pergunta">
-                                    <input class="color" type="text" placeholder="Cor de fundo da pergunta">
-                                </div>
-                                <h2>Resposta correta</h2>
-                                <div class="input-group no-margin-top right-answer">
-                                    <input class="text" type="text" placeholder="Resposta correta">
-                                    <input class="url" type="text" placeholder="URL da imagem">
-                                </div>
-                                <h2>Respostas incorreta</h2>
-                                <div class="input-group no-margin-top wrong-answer-1">
-                                    <input class="text" type="text" placeholder="Resposta incorreta 1">
-                                    <input class="url" type="text" placeholder="URL da imagem 1">
-                                </div>
-                                <div class="input-group wrong-answer-2">
-                                    <input class="text" type="text" placeholder="Resposta incorreta 2">
-                                    <input class="url" type="text" placeholder="URL da imagem 2">
-                                </div>
-                                <div class="input-group wrong-answer-3">
-                                    <input class="text" type="text" placeholder="Resposta incorreta 3">
-                                    <input class="url" type="text" placeholder="URL da imagem 3">
-                                </div>
-                            </div>
-                        </li>  
-                    </ul>
+                    <ul class="questions"></ul>
                     <div class="container-button">
                         <button onclick="goToNextPage()" class="continue">Prosseguir para criar níveis</button>
                     </div>

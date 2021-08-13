@@ -71,6 +71,11 @@ button {
     background-color: #FFFFFF;
     padding-top: 18px;
     padding-bottom: 24px;
+    width: 100%;
+}
+
+.screen-create-quizz .subscreen-create-basic .form{
+    width: 95%;
 }
 
 .screen-create-quizz .subscreen-create-basic div.content{
@@ -78,7 +83,7 @@ button {
 }
 
 .screen-create-quizz input,textarea{ 
-    width: 95%;
+    width: 100%;
     height: 46px;
     margin-top: 9px;
     border: 1px solid #D1D1D1;
@@ -88,17 +93,12 @@ button {
     font-size: 19px;
 }
 
-.screen-create-quizz input.invalid{
+input.invalid{
     background-color: #FFE9E9;
 }
 
-
-.screen-create-quizz .input-container {
-    width: 95%;
-}
-
-.screen-create-quizz .input-container input{
-    width: 100%;
+.input-container {
+    width: 100% !important;
 }
 
 .screen-create-quizz div.input-group {
@@ -112,7 +112,7 @@ button {
     width: 100%;
 }
 
-.screen-create-quizz textarea#description{
+.screen-create-quizz textarea.description{
     height: 341px;
     display: flex;
     align-items: flex-start;
