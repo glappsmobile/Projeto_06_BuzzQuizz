@@ -44,11 +44,27 @@
 
             <section class="subscreen subscreen-create-basic hidden">
                 <div class="content">
-                    <input class="title" type="text" onblur="inputLengthCheck(this, 20);" maxlength="65" placeholder="Título do seu quizz">
-                    <input class="url" type="text" placeholder="URL da imagem do seu quizz">
-                    <input class="quantity-questions" type="number" onblur="inputNumberCheck(this, 3, 10);" maxlength="2" placeholder="Quantidade de perguntas do quizz">
-                    <input class="quantity-levels" type="number" onblur="inputNumberCheck(this, 2, 10);" maxlength="2"  placeholder="Quantidade de níveis do quizz">
+                    <div class="title input-container">
+                        <span class="error"></span>
+                        <input type="text" onblur="inputMinLengthCheck(this, 20);" maxlength="65" placeholder="Título do seu quizz">
+                    </div> 
+
+                    <div class="url input-container">
+                        <span class="error"></span>
+                        <input type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem do seu quizz">
+                    </div> 
+
+                    <div class="quantity-questions input-container">
+                        <span class="error"></span>
+                        <input type="number" onblur="inputNumberCheck(this, 3, 10);" maxlength="2" placeholder="Quantidade de perguntas do quizz">
+                    </div> 
+
+                    <div class="quantity-levels input-container">
+                        <span class="error"></span>
+                        <input type="number" onblur="inputNumberCheck(this, 2, 10);" maxlength="2"  placeholder="Quantidade de níveis do quizz">
+                    </div> 
                 </div>
+
                 <div class="container-button">
                     <button onclick="goToNextPage()" class="continue">Prosseguir para criar perguntas</button>
                 </div>

@@ -14,7 +14,7 @@ button {
     margin-top: 0 !important;
 }
 
-section.screen-create-quizz {
+.screen-create-quizz {
     padding-top: 69px;
     display: flex;
     flex-direction: column;
@@ -22,14 +22,14 @@ section.screen-create-quizz {
     width: 100%;
 }
 
-section.screen-create-quizz section {
+.screen-create-quizz section {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 
-section.screen-create-quizz h1{
+.screen-create-quizz h1{
     font-size: 23px;
     font-weight: 700;
     margin-bottom: 0;
@@ -41,7 +41,7 @@ section.screen-create-quizz h1{
 }
 
 
-section.screen-create-quizz h2 {
+.screen-create-quizz h2 {
     width: 90%;
     padding-top: 27px;
     font-size: 20px;
@@ -49,7 +49,16 @@ section.screen-create-quizz h2 {
     margin-bottom: 0;
 }
 
-section.screen-create-quizz div.content{
+.screen-create-quizz span.error {
+    display: block;
+    width: 95%;
+    font-size: 14px;
+    color: red;
+    margin-top: 10px;
+}
+
+
+.screen-create-quizz div.content{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,17 +67,17 @@ section.screen-create-quizz div.content{
 }
 
 
-section.screen-create-quizz .subscreen-create-basic div.content{
+.screen-create-quizz .subscreen-create-basic div.content{
     background-color: #FFFFFF;
     padding-top: 18px;
     padding-bottom: 24px;
 }
 
-section.screen-create-quizz .subscreen-create-basic div.content{
+.screen-create-quizz .subscreen-create-basic div.content{
     margin-top: 21px;
 }
 
-section.screen-create-quizz div.content input,textarea{ 
+.screen-create-quizz input,textarea{ 
     width: 95%;
     height: 46px;
     margin-top: 9px;
@@ -79,18 +88,31 @@ section.screen-create-quizz div.content input,textarea{
     font-size: 19px;
 }
 
-section.screen-create-quizz div.input-group {
+.screen-create-quizz input.invalid{
+    background-color: #FFE9E9;
+}
+
+
+.screen-create-quizz .input-container {
+    width: 95%;
+}
+
+.screen-create-quizz .input-container input{
+    width: 100%;
+}
+
+.screen-create-quizz div.input-group {
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-top: 23px;
 }
 
-section.screen-create-quizz div.input-group input,textarea{
+.screen-create-quizz div.input-group input,textarea{
     width: 100%;
 }
 
-section.screen-create-quizz textarea#description{
+.screen-create-quizz textarea#description{
     height: 341px;
     display: flex;
     align-items: flex-start;
@@ -98,7 +120,7 @@ section.screen-create-quizz textarea#description{
     text-align: start;
 }
 
-section.screen-create-quizz button.continue {
+.screen-create-quizz button.continue {
     height: 50px;
     border: 1px solid #ec362d;
     border-radius: 15px;
@@ -108,20 +130,20 @@ section.screen-create-quizz button.continue {
     padding: 0 35px;
 }
 
-section.screen-create-quizz button.continue:disabled {
+.screen-create-quizz button.continue:disabled {
     background-color: transparent;
     border: 1px dashed #ec362d;
     color: #ec362d;
 }
 
-section.screen-create-quizz ul {
+.screen-create-quizz ul {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
 
-section.screen-create-quizz li {
+.screen-create-quizz li {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -131,7 +153,7 @@ section.screen-create-quizz li {
 
 }
 
-section.screen-create-quizz .holder {
+.screen-create-quizz .holder {
     display: none;
     justify-content: space-between;
     align-items: center;
@@ -141,58 +163,58 @@ section.screen-create-quizz .holder {
 
 }
 
-section.screen-create-quizz .body {
+.screen-create-quizz .body {
     width: 100%;
 }
 
-section.screen-create-quizz .holder span{
+.screen-create-quizz .holder span{
     font-size: 20px;
 }
 
-section.screen-create-quizz .holder img{
+.screen-create-quizz .holder img{
     width: 26px;
     height: 23px;
 }
 
-section.screen-create-quizz li.collapsed .holder {
+.screen-create-quizz li.collapsed .holder {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
-section.screen-create-quizz li.collapsed .body {
+.screen-create-quizz li.collapsed .body {
     display: none;
 }
 
-section.screen-create-quizz li.collapsed {
+.screen-create-quizz li.collapsed {
     margin-bottom: 22px;
     padding-bottom: 0;
 
 }
 
-section.screen-create-quizz li {
+.screen-create-quizz li {
     padding-bottom: 27px;
     margin-bottom: 24px;
 }
 
-section.screen-create-quizz li:last-child {
+.screen-create-quizz li:last-child {
     margin-bottom: 0;
 }
 
-section.screen-create-quizz .container-button {
+.screen-create-quizz .container-button {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 150px;
 }
 
-section.screen-create-quizz .subscreen-create-success {
+.screen-create-quizz .subscreen-create-success {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-section.screen-create-quizz .subscreen-create-success .container-img {
+.screen-create-quizz .subscreen-create-success .container-img {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -201,12 +223,12 @@ section.screen-create-quizz .subscreen-create-success .container-img {
     max-width: 500px;
 }
 
-section.screen-create-quizz .subscreen-create-success .container-img img {
+.screen-create-quizz .subscreen-create-success .container-img img {
     width: 100%;
     border-radius: 5px;
 }
 
-section.screen-create-quizz .gradient {
+.screen-create-quizz .gradient {
     width: 100%;
     height: 100%;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 64.58%, #000000 100%);
@@ -216,7 +238,7 @@ section.screen-create-quizz .gradient {
     border-radius: 5px;
 }
 
-section.screen-create-quizz .subscreen-create-success .container-img span{
+.screen-create-quizz .subscreen-create-success .container-img span{
     position: absolute;
     font-size: 23px;
     color: #FFFFFF;
@@ -224,7 +246,7 @@ section.screen-create-quizz .subscreen-create-success .container-img span{
     left: 25px;
 }
 
-section.screen-create-quizz .subscreen-create-success button {
+.screen-create-quizz .subscreen-create-success button {
     margin-top: 24px;
     width: 220px;
 }
@@ -249,15 +271,15 @@ font-style: italic;
 }
 
 @media (max-width: 1100px) {
-    section.screen-create-quizz h1 {
+    .screen-create-quizz h1 {
         font-size: 20px;
     }
 
-    section.screen-create-quizz button.continue{
+    .screen-create-quizz button.continue{
         font-size: 18px;
     }
 
-    section.screen-create-quizz .subscreen-create-success .container-img span{
+    .screen-create-quizz .subscreen-create-success .container-img span{
         font-size: 19px;
     }
 
