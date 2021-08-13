@@ -82,14 +82,14 @@ function renderQuizzes() {
         }
 
         if ( is_created ) {
-            created_list.innerHTML += `<li class="quizz">
+            created_list.innerHTML += `<li class="quizz" id="${quizzes[i].id}" onclick="openQuizz(this);">
                     <img src="${quizzes[i].image}" />
                     <div class="gradient"></div>
                     <span class="title">${quizzes[i].title}</span>
                 </li>`
         }
         else {
-            all_quizzes_list.innerHTML += `<li class="quizz">
+            all_quizzes_list.innerHTML += `<li class="quizz" id="${quizzes[i].id}" onclick="openQuizz(this);">
                     <img src="${quizzes[i].image}" />
                     <div class="gradient"></div>
                     <span class="title">${quizzes[i].title}</span>
@@ -111,3 +111,17 @@ function getQuizzes() {
 }
 
 getQuizzes();
+
+function searchQuizz(element) {
+    for ( let i = 0; i < quizzes.length; i++ ) {
+        if ( quizzes[i].id === Number(element.id) ) {
+            return quizzes[i];
+        }
+    }
+}
+
+function openQuizz(element) {
+    const quizz = searchQuizz(element);
+
+    console.log(quizz);
+}
