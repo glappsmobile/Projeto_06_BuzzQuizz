@@ -86,3 +86,15 @@ section.screen-quizz-questions .question .options .option span {
     font-size: 20px;
     font-weight: 700;
 }
+
+section.screen-quizz-questions .question .options .option.wrong {
+    color: #FF4B4B;
+}
+
+section.screen-quizz-questions .question .options .option.right {
+    color: #009C22;
+}
+
+section.screen-quizz-questions .question .options .option.blur {
+    opacity: 0.3;
+}
