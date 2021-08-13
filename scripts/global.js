@@ -2,7 +2,8 @@ const API_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v3/buzzquizz/qu
 
 const SCREENS = {
     QUIZZ_LIST: "screen-quizz-list",
-    CREATE_QUIZZ: "screen-create-quizz"
+    CREATE_QUIZZ: "screen-create-quizz",
+    QUIZZ_QUESTIONS: "screen-quizz-questions"
 }
 
 const SUBSCREENS = {
@@ -115,5 +116,8 @@ getQuizzes();
 function openQuizz(element) {
     const promise = axios.get(API_URL + `/${element.id}`);
 
-    promise.then(function (object) {console.log(object.data)});
+    promise.then(function (object) {
+        openScreen(SCREENS.QUIZZ_QUESTIONS); 
+        renderQuestions(object.data) 
+    });
 }
