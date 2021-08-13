@@ -1,13 +1,19 @@
-function correctQuestion(chosenOption, questionIndex){
+let rightAnswers = 0;
+
+function correctQuestion(chosenOption, indexQuestion){
     const question = chosenOption.parentElement;
     const options = question.querySelectorAll(".option");
 
-    options.forEach((option, optionIndex) => {
+    options.forEach((option, indexOption) => {
         option.classList.add("blur");
-        const isCorrect = thisQuizz.questions[questionIndex].answers[optionIndex].isCorrectAnswer;
+        option.removeAttribute("onClick");
+        const isCorrect = thisQuizz.questions[indexQuestion].answers[indexOption].isCorrectAnswer;
         const optionClass = (isCorrect) ? "right" : "wrong";
         option.classList.add(optionClass);
+
+        if (isCorrect && option === chosenOption) { rightAnswers++; }
     });
+
     chosenOption.classList.remove("blur");
 }
 
@@ -20,43 +26,29 @@ function renderQuestions(){
 
     const black = "#000000";
     const white = "#FFFFFF";
+    let htmlList = "";
 
     bannerImg.src = thisQuizz.image;
     bannerTxt.innerHTML = thisQuizz.title;
-    thisQuizz.questions.forEach((question, index) => {
+    thisQuizz.questions.forEach((question, indexQuestion) => {
 
         const textColor = (isHexColorBright(question.color)) ? black : white;
-        list.innerHTML += `
+        htmlList += `
         <li class="question">
             <div class="title" style="color: ${textColor}; background-color: ${question.color}">${question.title}</div>
-            <div class="options">
-                <div class="option" onclick="correctQuestion(this, ${index})">
+            <ul class="options">`;
+        question.answers.forEach( answer => { htmlList += 
+                `<li class="option" onclick="correctQuestion(this, ${indexQuestion})">
                     <div class="option-img">
-                        <img src="${question.answers[0].image}" />
+                        <img src="${answer.image}" />
                     </div>
-                    <span>${question.answers[0].text}</span>
-                </div>
-                <div class="option" onclick="correctQuestion(this, ${index})">
-                    <div class="option-img">
-                    <img src="${question.answers[1].image}" />
-                    </div>
-                    <span>${question.answers[1].text}</span>
-                </div>
-                <div class="option" onclick="correctQuestion(this, ${index})">
-                    <div class="option-img">
-                    <img src="${question.answers[2].image}" />
-                    </div>
-                    <span>${question.answers[2].text}</span>
-                </div>
-                <div class="option" onclick="correctQuestion(this, ${index})">
-                    <div class="option-img">
-                    <img src="${question.answers[3].image}" />
-                    </div>
-                    <span>${question.answers[3].text}</span>
-                </div>
-            </div>
-        </li>
-        `
+                    <span>${answer.text}</span>
+                </li>`;});
+        htmlList += `
+            </ul> 
+        </li>`;
     });
+
+    list.innerHTML = htmlList;
 }
 
