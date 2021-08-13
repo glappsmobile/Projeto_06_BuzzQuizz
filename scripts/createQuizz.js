@@ -153,9 +153,6 @@ function renderCreateQuestionForm(quantityQuestions){
 }
 
 
-openScreen(SCREENS.CREATE_QUIZZ);
-openSubscreen(SUBSCREENS.CREATE_QUESTIONS);
-renderCreateQuestionForm(3);
 
 function goToNextPage(){
     const screen = document.querySelector(`.${current.screen}`);
@@ -179,6 +176,8 @@ function goToNextPage(){
             if (isValid) {
                 quizzInCreation.title = title.value;
                 quizzInCreation.image = url.value;
+                quizzInCreation.quantityQuestions = Number(quantityQuestions.value);
+                quantityLevels.quantityLevels =  Number(quantityLevels.value);
                 renderCreateQuestionForm(Number(quantityQuestions.value));
                 openSubscreen(SUBSCREENS.CREATE_QUESTIONS);
             }
@@ -186,7 +185,18 @@ function goToNextPage(){
         } 
 
         if (current.subscreen === SUBSCREENS.CREATE_QUESTIONS) {
-            openSubscreen(SUBSCREENS.CREATE_LEVELS);
+
+            const questions = subscreen.querySelectorAll(".question");
+
+            questions.forEach (question => {
+                const title = question.querySelector(".title input");
+                const url = subscreen.querySelector(".url input");
+                const quantityQuestions = subscreen.querySelector(".quantity-questions input");
+                const quantityLevels = subscreen.querySelector(".quantity-levels input");
+            });
+
+
+            //openSubscreen(SUBSCREENS.CREATE_LEVELS);
             return;
         }
 
