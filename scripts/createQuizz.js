@@ -1,5 +1,4 @@
 const quizzInCreation = {}
-
 const SHOW_ERROR = true;
 
 const TOP_TEXTS = {
@@ -82,12 +81,20 @@ function goToQuizzList(){
     getQuizzes();
 }
 
+function scrollHeaderHeight(){
+    const headerHeight = document.querySelector("header").clientHeight;
+    document.documentElement.scrollTop -= headerHeight;
+}
+
 function uncollapse(element){
     const listItem = element.parentElement;
+    view = listItem;
     const kind = listItem.classList[0];
     const siblings = document.querySelectorAll(`.${kind}`);
     siblings.forEach(sibling => sibling.classList.add("collapsed"));
     listItem.classList.remove("collapsed");
+    listItem.scrollIntoView(true);
+    scrollHeaderHeight();
 }
 
 function renderCreateLevelsForm(quantityLevels){

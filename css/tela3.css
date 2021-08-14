@@ -15,7 +15,7 @@ button {
 }
 
 .screen-create-quizz {
-    padding-top: 69px;
+    margin-top: 69px;
     display: flex;
     flex-direction: column;
     background-color: #E5E5E5;
