@@ -5,12 +5,8 @@ const isQuizzFinished = () => getTotalAnswered() === thisQuizz.questions.length;
 const getRate = () => Number(((rightAnswers/thisQuizz.questions.length)*100).toFixed());
 const getContrastColor = (hexColor) => (isHexColorBright(hexColor)) ? "#000000" : "#FFFFFF";
 
-const restartQuizz = () => {
-    renderQuestions();
-
+function removeResult() {
     const screen = document.querySelector(`.${SCREENS.QUIZZ_QUESTIONS}`);
-    screen.scrollIntoView({behavior: "smooth"});
-
     const result = screen.querySelector("div.result");
     const restart_button = screen.querySelector("button");
     const back_button = screen.querySelector("span.back");
@@ -33,8 +29,8 @@ const renderQuizzResult = () => {
         <p>${level.text}</p>
         </div>
     </div>
-    <button onclick="restartQuizz();">Reiniciar Quizz</button>
-    <span onclick="goToQuizzList()" class="back">Voltar pra home</span>`;
+    <button onclick="renderQuestions();">Reiniciar Quizz</button>
+    <span onclick="goToQuizzList();" class="back">Voltar pra home</span>`;
 
     setTimeout(() => {container.scrollIntoView({block: "end", behavior: "smooth"})}, 2000);
 }
@@ -84,6 +80,11 @@ function renderQuestions(){
     const bannerImg = banner.querySelector("img");
     const bannerTxt = banner.querySelector("h1");
     let htmlList = "";
+    const result = screen.querySelector("div.result");
+    if ( result != undefined ) {
+        removeResult();
+        screen.scrollIntoView({behavior: "smooth"});
+    }
 
     bannerImg.src = thisQuizz.image;
     bannerTxt.innerHTML = thisQuizz.title;
