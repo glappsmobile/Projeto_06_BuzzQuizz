@@ -70,7 +70,11 @@ function correctQuestion(chosenOption, indexQuestion){
 
    chosenOption.classList.remove("blur");
 
-   if (isQuizzFinished()) { renderQuizzResult(); }
+   if (isQuizzFinished()) { 
+       renderQuizzResult(); 
+    } else {
+        
+    }
 
     setTimeout(nextQuestion, 2000);
 
