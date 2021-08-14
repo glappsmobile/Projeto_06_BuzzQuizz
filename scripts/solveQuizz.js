@@ -1,5 +1,23 @@
 let rightAnswers = 0;
 
+const getTotalAnswered = () => document.querySelectorAll(".answered").length;
+const isQuizzFinished = () => getTotalAnswered() === thisQuizz.questions.length;
+const getRate = () => Number(((rightAnswers/thisQuizz.questions.length)*100).toFixed());
+
+const renderQuizzResult = () => {
+    const container = document.querySelector(`.${SCREENS.QUIZZ_QUESTIONS} ul.questions`);
+
+
+    container.innerHTML += ` 
+    <div class="question result">
+        <div class="title">${getRate()}% de acerto</div>
+        <div class="result-box"> 
+        <img src="${thisQuizz.levels[0].image}" />
+        <p>${thisQuizz.levels[0].text}</p>
+        </div>
+    </div>`
+}
+
 function nextQuestion() {
     const questions = document.querySelectorAll("li.question");
 
@@ -28,8 +46,13 @@ function correctQuestion(chosenOption, indexQuestion){
         if (isCorrect && option === chosenOption) { rightAnswers++; }
     });
 
-    chosenOption.classList.remove("blur");
-    setTimeout(nextQuestion, 2000);
+   chosenOption.classList.remove("blur");
+
+   if (isQuizzFinished()) {
+        renderQuizzResult();
+    } else {
+        setTimeout(nextQuestion, 2000);
+    }
 }
 
 function renderQuestions(){
@@ -45,6 +68,7 @@ function renderQuestions(){
 
     bannerImg.src = thisQuizz.image;
     bannerTxt.innerHTML = thisQuizz.title;
+
     thisQuizz.questions.forEach((question, indexQuestion) => {
 
         const textColor = (isHexColorBright(question.color)) ? black : white;

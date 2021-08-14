@@ -142,64 +142,64 @@ function renderCreateQuestionForm(quantityQuestions){
         let visibility = (i === 1) ?  "" : "collapsed";
 
         list.innerHTML += `
-<li id="question-${i}" class="question ${visibility}">
-    <div class="holder" onclick="uncollapse(this)">
-        <span> Pergunta ${i}</span>
-        <img src="assets/icon-create.png"/>
-    </div>
-    <div class="body">
-        <h2>Pergunta ${i}</h2>
-        <div class="input-group no-margin-top main">
-            <div class="text input-container">
-                <span class="error"></span>
-                <input value="EXAMPLE TITLE EXAMPLE TITLE" type="text" onblur="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
-            </div> 
-            <div class="color input-container">
-                <span class="error"></span>
-                <input value="#FFFFFF" type="text" onclick="inputHexColorCheck(this)" placeholder="Cor de fundo da pergunta">
-            </div> 
-    </div>
-    <h2>Resposta correta</h2>
-    <div class="input-group no-margin-top right-answer">
-        <div class="text input-container">
-            <span class="error"></span>
-            <input value="RESPOSTA CORRETA" type="text" onblur="inputMinLengthCheck(this, 1);" placeholder="Resposta correta">
-        </div> 
-        <div class="url input-container">
-            <span class="error"></span>
-            <input value="https://i.imgur.com/TSDlJBs.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem">
-        </div> 
-    </div>
-    <h2>Respostas incorreta</h2>
-    <div class="input-group no-margin-top wrong-answer-1">
-        <div class="text input-container">
-            <span class="error"></span>
-            <input value="RESPOSTA ERRADA 1" onblur="inputMinLengthCheck(this, 1);" type="text" placeholder="Resposta incorreta 1">
-        <div class="url input-container">
-            <span class="error"></span>
-            <input value="https://i.imgur.com/TSDlJBs.jpg" type="text"  onblur="inputUrlCheck(this)"placeholder="URL da imagem 1">
-    </div>
-    <div class="input-group wrong-answer-2">
-        <div class="text input-container">
-            <span class="error"></span>
-            <input value="RESPOSTA ERRADA 2" onblur="inputMinLengthCheck(this, 1);" type="text" placeholder="Resposta incorreta 2">
-        </div>
-        <div class="url input-container">
-            <span class="error"></span>
-            <input value="https://i.imgur.com/TSDlJBs.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem 2">
-        </div>
-    </div>
-    <div class="input-group wrong-answer-3">
-        <div class="text input-container">
-            <span class="error"></span>
-            <input value="RESPOSTA ERRADA 3" onblur="inputMinLengthCheck(this, 1);" type="text" placeholder="Resposta incorreta 3">
-        </div>
-        <div class="url input-container">
-            <span class="error"></span>
-            <input value="https://i.imgur.com/TSDlJBs.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem 3">
-        </div>
-    </div>
-</li>`;
+            <li id="question-${i}" class="question ${visibility}">
+                <div class="holder" onclick="uncollapse(this)">
+                    <span> Pergunta ${i}</span>
+                    <img src="assets/icon-create.png"/>
+                </div>
+                <div class="body">
+                    <h2>Pergunta ${i}</h2>
+                    <div class="input-group no-margin-top main">
+                        <div class="text input-container">
+                            <span class="error"></span>
+                            <input value="EXAMPLE TITLE EXAMPLE TITLE" type="text" onblur="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
+                        </div> 
+                        <div class="color input-container">
+                            <span class="error"></span>
+                            <input value="#FFFFFF" type="text" onclick="inputHexColorCheck(this)" placeholder="Cor de fundo da pergunta">
+                        </div> 
+                </div>
+                <h2>Resposta correta</h2>
+                <div class="input-group no-margin-top right-answer">
+                    <div class="text input-container">
+                        <span class="error"></span>
+                        <input value="RESPOSTA CORRETA" type="text" onblur="inputMinLengthCheck(this, 1);" placeholder="Resposta correta">
+                    </div> 
+                    <div class="url input-container">
+                        <span class="error"></span>
+                        <input value="https://i.imgur.com/TSDlJBs.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem">
+                    </div> 
+                </div>
+                <h2>Respostas incorreta</h2>
+                <div class="input-group no-margin-top wrong-answer-1">
+                    <div class="text input-container">
+                        <span class="error"></span>
+                        <input value="RESPOSTA ERRADA 1" onblur="inputMinLengthCheck(this, 1);" type="text" placeholder="Resposta incorreta 1">
+                    <div class="url input-container">
+                        <span class="error"></span>
+                        <input value="https://i.imgur.com/TSDlJBs.jpg" type="text"  onblur="inputUrlCheck(this)"placeholder="URL da imagem 1">
+                </div>
+                <div class="input-group wrong-answer-2">
+                    <div class="text input-container">
+                        <span class="error"></span>
+                        <input value="RESPOSTA ERRADA 2" onblur="inputMinLengthCheck(this, 1);" type="text" placeholder="Resposta incorreta 2">
+                    </div>
+                    <div class="url input-container">
+                        <span class="error"></span>
+                        <input value="https://i.imgur.com/TSDlJBs.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem 2">
+                    </div>
+                </div>
+                <div class="input-group wrong-answer-3">
+                    <div class="text input-container">
+                        <span class="error"></span>
+                        <input value="RESPOSTA ERRADA 3" onblur="inputMinLengthCheck(this, 1);" type="text" placeholder="Resposta incorreta 3">
+                    </div>
+                    <div class="url input-container">
+                        <span class="error"></span>
+                        <input value="https://i.imgur.com/TSDlJBs.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem 3">
+                    </div>
+                </div>
+            </li>`;
     }
 }
 
