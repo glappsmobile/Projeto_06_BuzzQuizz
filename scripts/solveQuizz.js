@@ -73,11 +73,8 @@ function correctQuestion(chosenOption, indexQuestion){
    if (isQuizzFinished()) { 
        renderQuizzResult(); 
     } else {
-        
+        setTimeout(nextQuestion, 2000);
     }
-
-    setTimeout(nextQuestion, 2000);
-
 }
 
 function renderQuestions(){
