@@ -17,7 +17,7 @@ const renderQuizzResult = () => {
         </div>
     </div>`
 
-    container.scrollIntoView({block: "end", behavior: "smooth"});
+    setTimeout(() => {container.scrollIntoView({block: "end", behavior: "smooth"})}, 2000);
 }
 
 function nextQuestion() {

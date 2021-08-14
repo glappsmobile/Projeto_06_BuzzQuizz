@@ -79,6 +79,7 @@ function goToCreateQuizz(){
 
 function goToQuizzList(){
     openScreen(SCREENS.QUIZZ_LIST);
+    getQuizzes();
 }
 
 function uncollapse(element){
@@ -220,6 +221,15 @@ function postQuizz(){
 
         openSubscreen(SUBSCREENS.CREATE_SUCCESS);
         textTop.innerHTML = TOP_TEXTS.CREATE_SUCCESS;
+
+        const quizz_info = document.querySelector(".subscreen-create-success");
+        quizz_info.innerHTML = `<div class="container-img">
+                <img src="${quizzInCreation.image}" />
+                <div class="gradient"></div>
+                <span>${quizzInCreation.title}</span>
+            </div>
+            <button class="continue" id="${currentId}" onclick="openQuizz(this);">Acessar Quizz</button>
+            <span onclick="goToQuizzList()" class="back">Voltar pra home</span>`;
 
         console.log(response);
     })
