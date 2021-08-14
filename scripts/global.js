@@ -71,9 +71,6 @@ function renderQuizzes() {
     const all_quizzes_list = document.querySelector(".screen-quizz-list .all-quizzes ul");
 
     if ( id_created !== null ) {
-        const no_created_quizz = created.querySelector(".no-created-quizz");
-        no_created_quizz.classList.add("hidden");
-
         created.innerHTML = `<div class="new-quizz"><h1>Seus Quizzes</h1><ion-icon name="add-circle" onclick="goToCreateQuizz()"></ion-icon></div><ul></ul>`;
         
         created_list = created.querySelector("ul");
