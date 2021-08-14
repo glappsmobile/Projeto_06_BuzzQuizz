@@ -75,7 +75,7 @@ function correctQuestion(chosenOption, indexQuestion){
 
 function renderQuestions(){
     rightAnswers = 0;
-
+    sortQuizzQuestions();
     const screen = document.querySelector(`.${SCREENS.QUIZZ_QUESTIONS}`);
     const list = screen.querySelector("ul.questions");
     const banner = screen.querySelector(".banner");
