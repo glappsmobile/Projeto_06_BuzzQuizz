@@ -31,6 +31,16 @@ function closeAllSubscreens(){
     document.querySelectorAll(".subscreen").forEach(screen => screen.classList.add("hidden"));
 }
 
+function scrollToView(view){
+    //CALCULA A ALTURA DO HEADER PARA NÃO DEIXAR PARTE DA VIEW ESCONDIDA ATRÁS DELE
+    const headerHeight = document.querySelector("header").clientHeight;
+    document.documentElement.scrollTop += view.getBoundingClientRect().top - headerHeight;
+}
+
+function scrollToPageTop(){
+    document.documentElement.scrollIntoView()
+}
+
 function openScreen(classIdentifier){
     const screen = document.querySelector(`.${classIdentifier}`);
 
@@ -38,9 +48,7 @@ function openScreen(classIdentifier){
         closeAllScreens()
         current.screen = classIdentifier;
         screen.classList.remove("hidden");
-        screen.scrollIntoView();
-    } else {
-        console.error(`A SCREEN ${classIdentifier} NÃO EXISTE.`);
+        scrollToPageTop();
     }
 }
 
@@ -51,8 +59,7 @@ function openSubscreen(classIdentifier){
         closeAllSubscreens();
         current.subscreen = classIdentifier;
         subscreen.classList.remove("hidden");
-    } else {
-        console.error(`A SUBSCREEN ${classIdentifier} NÃO EXISTE.`);
+        scrollToPageTop();
     }
 }
 

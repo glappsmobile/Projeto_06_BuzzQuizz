@@ -70,7 +70,6 @@ function inputHexColorCheck(input, showError){
     }
 }
 
-
 function goToCreateQuizz(){
     openScreen(SCREENS.CREATE_QUIZZ);
     openSubscreen(SUBSCREENS.CREATE_BASIC);
@@ -81,16 +80,8 @@ function goToQuizzList(){
     getQuizzes();
 }
 
-function scrollHeaderHeight(){
-    const headerHeight = document.querySelector("header").clientHeight;
-    document.documentElement.scrollTop -= headerHeight;
-}
-
-function scrollDown(distance){
-    document.documentElement.scrollTop += distance;
-}
-
 function scrollToView(view){
+    //CALCULA A ALTURA DO HEADER PARA NÃO DEIXAR PARTE DA VIEW ESCONDIDA ATRÁS DELE
     const headerHeight = document.querySelector("header").clientHeight;
     document.documentElement.scrollTop += view.getBoundingClientRect().top - headerHeight;
 }
