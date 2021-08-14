@@ -2,6 +2,10 @@ body {
     background-color: #E5E5E5;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 button {
     cursor: pointer;
 }
@@ -181,6 +185,7 @@ input.invalid,textarea.invalid{
     justify-content: space-between;
     width: 100%;
 }
+
 
 .screen-create-quizz li.collapsed .body {
     display: none;

@@ -86,6 +86,15 @@ function scrollHeaderHeight(){
     document.documentElement.scrollTop -= headerHeight;
 }
 
+function scrollDown(distance){
+    document.documentElement.scrollTop += distance;
+}
+
+function scrollToView(view){
+    const headerHeight = document.querySelector("header").clientHeight;
+    document.documentElement.scrollTop += view.getBoundingClientRect().top - headerHeight;
+}
+
 function uncollapse(element){
     const listItem = element.parentElement;
     view = listItem;
@@ -93,8 +102,7 @@ function uncollapse(element){
     const siblings = document.querySelectorAll(`.${kind}`);
     siblings.forEach(sibling => sibling.classList.add("collapsed"));
     listItem.classList.remove("collapsed");
-    listItem.scrollIntoView(true);
-    scrollHeaderHeight();
+    scrollToView(listItem);
 }
 
 function renderCreateLevelsForm(quantityLevels){
