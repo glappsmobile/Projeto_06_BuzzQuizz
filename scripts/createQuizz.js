@@ -115,12 +115,12 @@ function renderCreateLevelsForm(quantityLevels){
             
                     <div class="min-percentage input-container">
                         <span class="error"></span>
-                        <input value="0" onblur="inputNumberCheck(this, 0, 100);" type="number" placeholder="% de acerto mínima">
+                        <input value="${(i-1)*10}" onblur="inputNumberCheck(this, 0, 100);" type="number" placeholder="% de acerto mínima">
                     </div> 
             
                     <div class="url input-container">
                         <span class="error"></span>
-                        <input value="https://i.imgur.com/TSDlJBs.jpg" onblur="inputUrlCheck(this)" type="text" placeholder="URL da imagem do nível">
+                        <input value="http://photos.demandstudios.com/getty/article/76/222/200281068-001.jpg" onblur="inputUrlCheck(this)" type="text" placeholder="URL da imagem do nível">
                     </div> 
             
                     <div class="description input-container">
@@ -153,7 +153,7 @@ function renderCreateQuestionForm(quantityQuestions){
                     <div class="input-group no-margin-top main">
                         <div class="text input-container">
                             <span class="error"></span>
-                            <input value="EXAMPLE TITLE EXAMPLE TITLE" type="text" onblur="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
+                            <input value="EXAMPLE TITLE ${i} EXAMPLE TITLE ${i}" type="text" onblur="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
                         </div> 
                         <div class="color input-container">
                             <span class="error"></span>
@@ -168,7 +168,7 @@ function renderCreateQuestionForm(quantityQuestions){
                     </div> 
                     <div class="url input-container">
                         <span class="error"></span>
-                        <input value="https://i.imgur.com/TSDlJBs.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem">
+                        <input value="http://photos.demandstudios.com/getty/article/76/222/200281068-001.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem">
                     </div> 
                 </div>
                 <h2>Respostas incorreta</h2>
@@ -178,7 +178,7 @@ function renderCreateQuestionForm(quantityQuestions){
                         <input value="RESPOSTA ERRADA 1" onblur="inputMinLengthCheck(this, 1);" type="text" placeholder="Resposta incorreta 1">
                     <div class="url input-container">
                         <span class="error"></span>
-                        <input value="https://i.imgur.com/TSDlJBs.jpg" type="text"  onblur="inputUrlCheck(this)"placeholder="URL da imagem 1">
+                        <input value="https://i.pinimg.com/564x/8c/8d/d8/8c8dd85e702d364729160efc4ed9e4ab.jpg" type="text"  onblur="inputUrlCheck(this)"placeholder="URL da imagem 1">
                 </div>
                 <div class="input-group wrong-answer-2">
                     <div class="text input-container">
@@ -187,7 +187,7 @@ function renderCreateQuestionForm(quantityQuestions){
                     </div>
                     <div class="url input-container">
                         <span class="error"></span>
-                        <input value="https://i.imgur.com/TSDlJBs.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem 2">
+                        <input value="https://miscmedia-9gag-fun.9cache.com/images/thumbnail-facebook/1557310702.1267_UgysAp_n.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem 2">
                     </div>
                 </div>
                 <div class="input-group wrong-answer-3">
@@ -197,7 +197,7 @@ function renderCreateQuestionForm(quantityQuestions){
                     </div>
                     <div class="url input-container">
                         <span class="error"></span>
-                        <input value="https://i.imgur.com/TSDlJBs.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem 3">
+                        <input value="https://images.livemint.com/img/2020/02/24/600x338/confusedmindistocka_1582567565590.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem 3">
                     </div>
                 </div>
             </li>`;
@@ -295,26 +295,16 @@ function goToNextPage(){
                 inputMinLengthCheck(wrongText3, 1, SHOW_ERROR);
                 inputUrlCheck(wrongUrl3, SHOW_ERROR);
 
-                quizzInCreation.questions[i] = {}
-                quizzInCreation.questions[i].title = text.value;
-                quizzInCreation.questions[i].color = color.value;
-                quizzInCreation.questions[i].answers = []
-                quizzInCreation.questions[i].answers[0] = {};
-                quizzInCreation.questions[i].answers[0].text = rightText.value;
-                quizzInCreation.questions[i].answers[0].image = rightUrl.value;
-                quizzInCreation.questions[i].answers[0].isCorrectAnswer = true;
-                quizzInCreation.questions[i].answers[1] = {};
-                quizzInCreation.questions[i].answers[1].text = wrongText1.value;
-                quizzInCreation.questions[i].answers[1].image = wrongUrl1.value;
-                quizzInCreation.questions[i].answers[1].isCorrectAnswer = false;
-                quizzInCreation.questions[i].answers[2] = {};
-                quizzInCreation.questions[i].answers[2].text = wrongText2.value;
-                quizzInCreation.questions[i].answers[2].image = wrongUrl2.value;
-                quizzInCreation.questions[i].answers[2].isCorrectAnswer = false;
-                quizzInCreation.questions[i].answers[3] = {};
-                quizzInCreation.questions[i].answers[3].text = wrongText3.value;
-                quizzInCreation.questions[i].answers[3].image = wrongUrl3.value;
-                quizzInCreation.questions[i].answers[3].isCorrectAnswer = false;
+                quizzInCreation.questions[i] = {
+                    title: text.value,
+                    color: color.value,
+                    answers: [
+                        {text: rightText.value, image: rightUrl.value, isCorrectAnswer: true},
+                        {text: wrongText1.value, image: wrongUrl1.value, isCorrectAnswer: false},
+                        {text: wrongText2.value, image: wrongUrl2.value, isCorrectAnswer: false},
+                        {text: wrongText3.value, image: wrongUrl3.value, isCorrectAnswer: false},
+                    ]
+                }
             });
 
             const isValid = subscreen.querySelectorAll("input.invalid").length === 0;
@@ -344,11 +334,12 @@ function goToNextPage(){
                 inputMinLengthCheck(description, 30, SHOW_ERROR);
                 inputNumberCheck(minValue, 0, 100, SHOW_ERROR);
 
-                quizzInCreation.levels[i] = {}
-                quizzInCreation.levels[i].title = title.value;
-                quizzInCreation.levels[i].image = image.value;
-                quizzInCreation.levels[i].text = description.value;
-                quizzInCreation.levels[i].minValue = Number(minValue.value);
+                quizzInCreation.levels[i] = {
+                    title: title.value,
+                    image: image.value,
+                    text: description.value,
+                    minValue:  Number(minValue.value)
+                }
 
                 if (minValue.value === "0") { hasLevelZero = true}
             });
@@ -357,9 +348,7 @@ function goToNextPage(){
 
             if (!hasLevelZero) {alert("Pelo menos 1 nível precisa ter porcentagem 0");}
 
-            if (isValid){
-                postQuizz();
-            }
+            if (isValid){ postQuizz(); }
             return;
         }
     }
