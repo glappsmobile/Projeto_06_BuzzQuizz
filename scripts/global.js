@@ -139,7 +139,6 @@ function openQuizz(element) {
     .then(response => {
         openScreen(SCREENS.QUIZZ_QUESTIONS); 
         thisQuizz = response.data;
-        sortQuizzQuestions();
         renderQuestions() 
     });
 }
