@@ -85,6 +85,7 @@
 .screen-quizz-questions .question .options .option span {
     font-size: 20px;
     font-weight: 700;
+    word-break: break-word;
 }
 
 .screen-quizz-questions .question .options .option.wrong {
