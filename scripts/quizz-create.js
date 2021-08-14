@@ -80,12 +80,6 @@ function goToQuizzList(){
     getQuizzes();
 }
 
-function scrollToView(view){
-    //CALCULA A ALTURA DO HEADER PARA NÃO DEIXAR PARTE DA VIEW ESCONDIDA ATRÁS DELE
-    const headerHeight = document.querySelector("header").clientHeight;
-    document.documentElement.scrollTop += view.getBoundingClientRect().top - headerHeight;
-}
-
 function uncollapse(element){
     const listItem = element.parentElement;
     view = listItem;
@@ -143,71 +137,87 @@ function renderCreateLevelsForm(quantityLevels){
 function renderCreateQuestionForm(quantityQuestions){
     const subscreen = document.querySelector(`.${SUBSCREENS.CREATE_QUESTIONS}`);
     const list = subscreen.querySelector("ul.questions");
+    const quantityAnswers = 4;
+    let htmlText = "";
+
+    let debbugUrls = [
+        "https://st2.depositphotos.com/3378121/5471/i/600/depositphotos_54718145-stock-photo-chihuahua-dog-crying-in-the.jpg",
+        "https://c8.alamy.com/comp/E929Y0/smiling-chihuahua-E929Y0.jpg",
+        "https://i.pinimg.com/736x/1a/58/7c/1a587cc5882f332996d3c67920fafec8.jpg",
+        "https://i.ytimg.com/vi/uWovLuMp98I/hqdefault.jpg",
+        "https://pbs.twimg.com/media/EejvK3FUMAU56Tu.jpg",
+        "https://m.media-amazon.com/images/I/517wI4E-ytL._AC_SS450_.jpg",
+        "https://i.redd.it/uo2zpzx2xoc21.jpg",
+        "https://pics.me.me/thumb_smiling-chihuahua-meme-wiring-schematic-diagram-51871003.png",
+        "https://i.pinimg.com/originals/6f/71/b8/6f71b810c740d95886dfd0ec4fa55981.jpg",
+        "https://static1.bigstockphoto.com/1/1/2/large1500/211917823.jpg",
+        "https://i.pinimg.com/originals/42/46/50/424650ab47aebd927712b29d41ae77d9.jpg",
+        "https://i.pinimg.com/originals/cd/38/92/cd38924769a63697af2938f9512a54d7.jpg",
+        "https://i.pinimg.com/474x/a7/9b/11/a79b115ed535bed2227cf28c3cbdc4b1.jpg",
+        "https://i.pinimg.com/originals/06/9a/70/069a708356a6a8f83e197f16651136bf.jpg",
+        "https://pbs.twimg.com/media/DcEHtFIX4AAs1O5.jpg",
+        "https://pbs.twimg.com/profile_images/1281037224264577029/qJLHPDLD_400x400.jpg",
+        "https://pbs.twimg.com/media/DcEH61AW4AALYjD.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKzUJPsSI5eJ4p6feonHRREJOunD-8o2eFzHr6Yq-t3Nt9YXbU-f_zQ7ry7DOfwT3Mvs&usqp=CAU",
+        "https://www.petlove.com.br/dicas/wp-content/uploads/2014/07/pinscher2-1280x720.jpg",
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dnz_OBrmFirA&psig=AOvVaw0z3clgH0xt36lSzb4GTp26&ust=1629057571025000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOjOv8GmsfICFQAAAAAdAAAAABAO",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjVxMnEVS1mY2EFkaNzLN00jrNeVNsY0DJqnlR9CtarHKn6jwsCfgbvwM9IOXi98S4A28&usqp=CAU"
+        
+    ];
+
+    const randomColor = () => '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
 
     for (let i = 1; i <= quantityQuestions; i++) {
 
-        let visibility = (i === 1) ?  "" : "collapsed";
+        const visibility = (i === 1) ?  "" : "collapsed";
+        debbugUrls.sort(() => Math.random() - 0.5);
 
-        list.innerHTML += `
-            <li id="question-${i}" class="question ${visibility}">
-                <div class="holder" onclick="uncollapse(this)">
-                    <span> Pergunta ${i}</span>
-                    <img src="assets/icon-create.png"/>
-                </div>
-                <div class="body">
-                    <h2>Pergunta ${i}</h2>
-                    <div class="input-group no-margin-top main">
+        htmlText += `
+        <li class="question ${visibility}">
+            <div class="holder" onclick="uncollapse(this)">
+                <span> Pergunta ${i}</span>
+                <img src="assets/icon-create.png"/>
+            </div>
+            <div class="body">
+                <h2>Pergunta ${i}</h2>
+                <div class="input-group no-margin-top main">
+                    <div class="text input-container">
+                        <span class="error"></span>
+                        <input value="EXAMPLE TITLE ${i} EXAMPLE TITLE ${i}" type="text" onblur="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
+                    </div> 
+                    <div class="color input-container">
+                        <span class="error"></span>
+                        <input value="${randomColor()}" type="text" onclick="inputHexColorCheck(this)" placeholder="Cor de fundo da pergunta">
+                    </div> 
+                </div>`;
+
+            for(let z = 0; z < quantityAnswers;z++){
+                
+                const placeholder = (z === 0) ? "Resposta correta" : `Resposta incorreta ${z}`;
+                const answerClass = (z === 0) ? "right-answer" : `wrong-answer-${z}`;
+                const marginClass = (z === 0 || z === 1) ? "no-margin-top" : "";
+                let label = "";
+                label = (z === 0) ? "<h2>Resposta correta</h2>" : label;
+                label = (z === 1) ? "<h2>Respostas incorretas</h2>" : label;
+
+                htmlText += `${label}
+                    <div class="input-group ${marginClass} ${answerClass}">
                         <div class="text input-container">
                             <span class="error"></span>
-                            <input value="EXAMPLE TITLE ${i} EXAMPLE TITLE ${i}" type="text" onblur="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
+                            <input value="${placeholder}" type="text" onblur="inputMinLengthCheck(this, 1);" placeholder="${placeholder}">
                         </div> 
-                        <div class="color input-container">
+                        <div class="url input-container">
                             <span class="error"></span>
-                            <input value="#FFFFFF" type="text" onclick="inputHexColorCheck(this)" placeholder="Cor de fundo da pergunta">
+                            <input value="${debbugUrls[z]}" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem">
                         </div> 
-                </div>
-                <h2>Resposta correta</h2>
-                <div class="input-group no-margin-top right-answer">
-                    <div class="text input-container">
-                        <span class="error"></span>
-                        <input value="RESPOSTA CORRETA" type="text" onblur="inputMinLengthCheck(this, 1);" placeholder="Resposta correta">
-                    </div> 
-                    <div class="url input-container">
-                        <span class="error"></span>
-                        <input value="http://photos.demandstudios.com/getty/article/76/222/200281068-001.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem">
-                    </div> 
-                </div>
-                <h2>Respostas incorreta</h2>
-                <div class="input-group no-margin-top wrong-answer-1">
-                    <div class="text input-container">
-                        <span class="error"></span>
-                        <input value="RESPOSTA ERRADA 1" onblur="inputMinLengthCheck(this, 1);" type="text" placeholder="Resposta incorreta 1">
-                    <div class="url input-container">
-                        <span class="error"></span>
-                        <input value="https://i.pinimg.com/564x/8c/8d/d8/8c8dd85e702d364729160efc4ed9e4ab.jpg" type="text"  onblur="inputUrlCheck(this)"placeholder="URL da imagem 1">
-                </div>
-                <div class="input-group wrong-answer-2">
-                    <div class="text input-container">
-                        <span class="error"></span>
-                        <input value="RESPOSTA ERRADA 2" onblur="inputMinLengthCheck(this, 1);" type="text" placeholder="Resposta incorreta 2">
-                    </div>
-                    <div class="url input-container">
-                        <span class="error"></span>
-                        <input value="https://miscmedia-9gag-fun.9cache.com/images/thumbnail-facebook/1557310702.1267_UgysAp_n.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem 2">
-                    </div>
-                </div>
-                <div class="input-group wrong-answer-3">
-                    <div class="text input-container">
-                        <span class="error"></span>
-                        <input value="RESPOSTA ERRADA 3" onblur="inputMinLengthCheck(this, 1);" type="text" placeholder="Resposta incorreta 3">
-                    </div>
-                    <div class="url input-container">
-                        <span class="error"></span>
-                        <input value="https://images.livemint.com/img/2020/02/24/600x338/confusedmindistocka_1582567565590.jpg" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem 3">
-                    </div>
-                </div>
-            </li>`;
+                    </div>`
+            }
+           htmlText += `
+            </div>
+        </li>`;
     }
+    list.innerHTML += htmlText;
+
 }
 
 function postQuizz(){

@@ -2,7 +2,7 @@ const API_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v3/buzzquizz/qu
 
 const SCREENS = {
     QUIZZ_LIST: "screen-quizz-list",
-    CREATE_QUIZZ: "screen-create-quizz",
+    CREATE_QUIZZ: "screen-quizz-create",
     QUIZZ_QUESTIONS: "screen-quizz-questions"
 }
 
