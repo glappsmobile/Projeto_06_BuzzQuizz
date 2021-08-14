@@ -16,6 +16,8 @@ const renderQuizzResult = () => {
         <p>${thisQuizz.levels[0].text}</p>
         </div>
     </div>`
+
+    container.scrollIntoView({block: "end", behavior: "smooth"});
 }
 
 function nextQuestion() {
