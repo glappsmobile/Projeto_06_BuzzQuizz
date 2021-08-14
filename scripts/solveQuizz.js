@@ -4,18 +4,35 @@ const getTotalAnswered = () => document.querySelectorAll(".answered").length;
 const isQuizzFinished = () => getTotalAnswered() === thisQuizz.questions.length;
 const getRate = () => Number(((rightAnswers/thisQuizz.questions.length)*100).toFixed());
 
+const restartQuizz = () => {
+    renderQuestions();
+
+    const screen = document.querySelector(`.${SCREENS.QUIZZ_QUESTIONS}`);
+    screen.scrollIntoView({behavior: "smooth"});
+
+    const result = screen.querySelector("div.result");
+    const restart_button = screen.querySelector("button");
+    const back_button = screen.querySelector("span.back");
+
+    result.remove();
+    restart_button.remove();
+    back_button.remove();
+}
+
 const renderQuizzResult = () => {
-    const container = document.querySelector(`.${SCREENS.QUIZZ_QUESTIONS} ul.questions`);
+    const container = document.querySelector(`.${SCREENS.QUIZZ_QUESTIONS}`);
 
 
     container.innerHTML += ` 
     <div class="question result">
-        <div class="title">${getRate()}% de acerto</div>
+        <div class="title">${getRate()}% de acerto: ${thisQuizz.levels[0].title}</div>
         <div class="result-box"> 
         <img src="${thisQuizz.levels[0].image}" />
         <p>${thisQuizz.levels[0].text}</p>
         </div>
-    </div>`
+    </div>
+    <button onclick="restartQuizz();">Reiniciar Quizz</button>
+    <span onclick="goToQuizzList()" class="back">Voltar pra home</span>`;
 
     setTimeout(() => {container.scrollIntoView({block: "end", behavior: "smooth"})}, 2000);
 }
