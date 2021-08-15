@@ -1,4 +1,4 @@
-const quizzInCreation = {}
+let quizzInCreation = {}
 const SHOW_ERROR = true;
 
 const TOP_TEXTS = {
@@ -8,27 +8,28 @@ const TOP_TEXTS = {
     CREATE_SUCCESS: "Seu quizz está pronto!"
 }
 
+const clearCreateBasicInputs = () => {
+    document.querySelectorAll(`.${SUBSCREENS.CREATE_BASIC} input`).forEach((input) => {
+        input.value = "";
+    });
+}
+
+const clearApp = () => {
+    //TUDO QUE PRECISAR SER LIMPO AO CRIAR O QUIZZ
+    clearCreateBasicInputs();
+    quizzInCreation = {}
+}
+
 const uncollapseInvalidInputParents = () => {
-  /*  document.querySelectorAll(".invalid").forEach((input) => {
-        const collapsableItem = input.parentElement.parentElement.parentElement.parentElement;
-        console.log("----")
-
-        if (collapsableItem !== undefined && collapsableItem !== null) {
-             collapsableItem.classList.remove("collapsed"); 
-             collapsableItem.classList.add("uncollapsable"); 
-
-        }
-    });*/
-
     document.querySelectorAll(".collapsable,.uncollapsable").forEach(question => {
-        if (!!question.querySelector(".invalid")) {
-            question.classList.remove("collapsed"); 
-            question.classList.remove("collapsable"); 
-            question.classList.add("uncollapsable"); 
-        } else {
+        if (!question.querySelector(".invalid")) {
             question.classList.add("collapsed"); 
             question.classList.add("collapsable"); 
             question.classList.remove("uncollapsable"); 
+        } else {
+            question.classList.remove("collapsed"); 
+            question.classList.remove("collapsable"); 
+            question.classList.add("uncollapsable");
         }
     });
 }
@@ -66,11 +67,12 @@ function inputNumberCheck(input, min, max, showError){
 
     if (input.value < min) {
         input.value = min;
+        setInputError(input, "");
     } else if (input.value > max){
         input.value = max;
+        setInputError(input, "");
     }
 
-    setInputError(input, "");
     return true;
 }
 
@@ -98,6 +100,7 @@ function inputUrlCheck(input, showError){
 
 function inputHexColorCheck(input, showError){
     const matchpattern = /^#[0-9A-F]{6}$/i;
+
     if (!matchpattern.test(input.value)){
         if (showError) { setInputError(input, "O valor informado não é uma cor em hexadecimal"); }
         return false;
@@ -138,6 +141,7 @@ function uncollapse(element){
 function renderCreateLevelsForm(quantityLevels){
     const subscreen = document.querySelector(`.${SUBSCREENS.CREATE_LEVELS}`);
     const list = subscreen.querySelector("ul.levels");
+    list.innerHTML = "";
 
     for (let i = 1; i <= quantityLevels; i++) {
 
@@ -150,12 +154,12 @@ function renderCreateLevelsForm(quantityLevels){
                 <img src="assets/icon-create.png"/>
             </div>
             <div class="body">
-            <div class="container-list-name">
-                <h2>Nível ${i}</h2>
-            <ion-button class="btn-collapse" title="Minimizar" onClick="collapseParent(this)">
-                <ion-icon name="chevron-down-outline"></ion-icon>
-            </ion-button>
-            </div>
+                <div class="container-list-name">
+                    <h2>Nível ${i}</h2>
+                <ion-button class="btn-collapse" title="Minimizar" onClick="collapseParent(this)">
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                </ion-button>
+                </div>
                 <div class="input-group no-margin-top main">
         
                     <div class="title input-container">
@@ -177,7 +181,6 @@ function renderCreateLevelsForm(quantityLevels){
                         <span class="error"></span>
                         <textarea type="text" placeholder="Descrição do nível">UMA DESCRIÇÃO BEM LONGA COM BEEM MAIS DE 30 CARACTERES, TEM UNS QUARENTA OU SETENTA</textarea>
                     </div> 
-            
                 </div>
             </div>
         </li>`;
@@ -187,6 +190,7 @@ function renderCreateLevelsForm(quantityLevels){
 function renderCreateQuestionForm(quantityQuestions){
     const subscreen = document.querySelector(`.${SUBSCREENS.CREATE_QUESTIONS}`);
     const list = subscreen.querySelector("ul.questions");
+    list.innerHTML = "";
     const quantityAnswers = 4;
     let htmlText = "";
 
@@ -273,35 +277,39 @@ function renderCreateQuestionForm(quantityQuestions){
     list.innerHTML += htmlText;
 }
 
+const postQuizzSuccess = (response) => {
+    const textTop = document.querySelector(`.${SCREENS.CREATE_QUIZZ} .title h1`);
+
+    const currentId = response.data.id;
+    const previousIds = localStorage.getItem("id"); 
+    let arrIds = [];
+
+    if (previousIds !== null && previousIds !== undefined){
+        arrIds = JSON.parse(previousIds);
+    }
+
+    arrIds.push(currentId);
+    localStorage.setItem("id", JSON.stringify(arrIds));
+
+    textTop.innerHTML = TOP_TEXTS.CREATE_SUCCESS;
+    openSubscreen(SUBSCREENS.CREATE_SUCCESS);
+
+    const quizz_info = document.querySelector(".subscreen-create-success");
+    quizz_info.innerHTML = `
+        <div class="container-img">
+            <img src="${quizzInCreation.image}" />
+            <div class="gradient"></div>
+            <span>${quizzInCreation.title}</span>
+        </div>
+        <button class="continue" id="${currentId}" onclick="openQuizz(this);">Acessar Quizz</button>
+        <span onclick="goToQuizzList()" class="back">Voltar pra home</span>`;
+    
+    clearApp();
+}
+
 function postQuizz(){
     axios.post(API_URL, quizzInCreation)
-    .then(response => {
-        const textTop = document.querySelector(`.${SCREENS.CREATE_QUIZZ} .title h1`);
-        const currentId = response.data.id;
-        const previousIds = localStorage.getItem("id"); 
-        let arrIds = [];
-        if (previousIds !== null){
-            arrIds = JSON.parse(previousIds);
-        }
-
-        arrIds.push(currentId);
-
-        localStorage.setItem("id", JSON.stringify(arrIds));
-
-        openSubscreen(SUBSCREENS.CREATE_SUCCESS);
-        textTop.innerHTML = TOP_TEXTS.CREATE_SUCCESS;
-
-        const quizz_info = document.querySelector(".subscreen-create-success");
-        quizz_info.innerHTML = `<div class="container-img">
-                <img src="${quizzInCreation.image}" />
-                <div class="gradient"></div>
-                <span>${quizzInCreation.title}</span>
-            </div>
-            <button class="continue" id="${currentId}" onclick="openQuizz(this);">Acessar Quizz</button>
-            <span onclick="goToQuizzList()" class="back">Voltar pra home</span>`;
-
-        console.log(response);
-    })
+    .then(postQuizzSuccess)
     .catch(error => console.error(error)); 
 }
 
