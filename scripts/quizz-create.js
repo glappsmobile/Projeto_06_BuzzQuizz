@@ -153,24 +153,24 @@ function renderCreateLevelsForm(quantityLevels){
                 </div>
                 <div class="input-group no-margin-top main">
         
-                    <div class="title input-container">
-                        <span class="error"></span>
+                    <div class="title input-container">                      
                         <input value="Titulo do Level ${i}" onkeyup="inputMinLengthCheck(this, 10);" type="text" placeholder="Título do nível">
+                        <span class="error"></span>
                     </div> 
             
-                    <div class="min-percentage input-container">
-                        <span class="error"></span>
+                    <div class="min-percentage input-container">                       
                         <input value="${(i-1)*10}" onkeyup="inputNumberCheck(this, 0, 100);" type="number" placeholder="% de acerto mínima">
+                        <span class="error"></span>
                     </div> 
             
-                    <div class="url input-container">
-                        <span class="error"></span>
+                    <div class="url input-container">                       
                         <input value="http://photos.demandstudios.com/getty/article/76/222/200281068-001.jpg" onkeyup="inputUrlCheck(this)" type="text" placeholder="URL da imagem do nível">
+                        <span class="error"></span>
                     </div> 
             
-                    <div class="description input-container">
-                        <span class="error"></span>
+                    <div class="description input-container">                      
                         <textarea type="text" placeholder="Descrição do nível">UMA DESCRIÇÃO BEM LONGA COM BEEM MAIS DE 30 CARACTERES, TEM UNS QUARENTA OU SETENTA</textarea>
+                        <span class="error"></span>
                     </div> 
                 </div>
             </div>
@@ -232,12 +232,12 @@ function renderCreateQuestionForm(quantityQuestions){
                 </div>
                 <div class="input-group no-margin-top main">
                     <div class="text input-container">
-                        <span class="error"></span>
                         <input value="EXAMPLE TITLE ${i} EXAMPLE TITLE ${i}" type="text" onkeyup="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
-                    </div> 
-                    <div class="color input-container">
                         <span class="error"></span>
+                    </div> 
+                    <div class="color input-container">                                             
                         <input value="${randomColor()}" type="text" onclick="inputHexColorCheck(this)" placeholder="Cor de fundo da pergunta">
+                        <span class="error"></span>
                     </div> 
                 </div>`;
 
@@ -254,12 +254,12 @@ function renderCreateQuestionForm(quantityQuestions){
                 htmlText += `${label}
                 <div class="input-group ${marginClass} ${answerClass}">
                     <div class="text input-container">
-                        <span class="error"></span>
                         <input value="${placeholder}" type="text" onkeyup="inputMinLengthCheck(this, 1);" placeholder="${placeholder} ${opcional}">
-                    </div> 
-                    <div class="url input-container">
                         <span class="error"></span>
+                    </div> 
+                    <div class="url input-container">                       
                         <input value="${debbugUrls[z]}" type="text" onkeyup="inputUrlCheck(this)" placeholder="URL da imagem">
+                        <span class="error"></span>
                     </div> 
                 </div>`
             }
