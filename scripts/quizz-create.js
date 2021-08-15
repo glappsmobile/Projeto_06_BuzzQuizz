@@ -115,7 +115,7 @@ function renderCreateLevelsForm(quantityLevels){
             </div>
             <div class="body">
             <div class="container-list-name">
-            <h2>Nível ${i}</h2>
+                <h2>Nível ${i}</h2>
             <ion-button title="Minimizar" onClick="collapseParent(this)">
                 <ion-icon name="chevron-down-outline"></ion-icon>
             </ion-button>
@@ -124,17 +124,17 @@ function renderCreateLevelsForm(quantityLevels){
         
                     <div class="title input-container">
                         <span class="error"></span>
-                        <input value="Titulo do Level ${i}" onblur="inputMinLengthCheck(this, 10);" type="text" placeholder="Título do nível">
+                        <input value="Titulo do Level ${i}" onkeyup="inputMinLengthCheck(this, 10);" type="text" placeholder="Título do nível">
                     </div> 
             
                     <div class="min-percentage input-container">
                         <span class="error"></span>
-                        <input value="${(i-1)*10}" onblur="inputNumberCheck(this, 0, 100);" type="number" placeholder="% de acerto mínima">
+                        <input value="${(i-1)*10}" onkeyup="inputNumberCheck(this, 0, 100);" type="number" placeholder="% de acerto mínima">
                     </div> 
             
                     <div class="url input-container">
                         <span class="error"></span>
-                        <input value="http://photos.demandstudios.com/getty/article/76/222/200281068-001.jpg" onblur="inputUrlCheck(this)" type="text" placeholder="URL da imagem do nível">
+                        <input value="http://photos.demandstudios.com/getty/article/76/222/200281068-001.jpg" onkeyup="inputUrlCheck(this)" type="text" placeholder="URL da imagem do nível">
                     </div> 
             
                     <div class="description input-container">
@@ -201,7 +201,7 @@ function renderCreateQuestionForm(quantityQuestions){
                 <div class="input-group no-margin-top main">
                     <div class="text input-container">
                         <span class="error"></span>
-                        <input value="EXAMPLE TITLE ${i} EXAMPLE TITLE ${i}" type="text" onblur="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
+                        <input value="EXAMPLE TITLE ${i} EXAMPLE TITLE ${i}" type="text" onkeyup="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
                     </div> 
                     <div class="color input-container">
                         <span class="error"></span>
@@ -222,11 +222,11 @@ function renderCreateQuestionForm(quantityQuestions){
                 <div class="input-group ${marginClass} ${answerClass}">
                     <div class="text input-container">
                         <span class="error"></span>
-                        <input value="${placeholder}" type="text" onblur="inputMinLengthCheck(this, 1);" placeholder="${placeholder}">
+                        <input value="${placeholder}" type="text" onkeyup="inputMinLengthCheck(this, 1);" placeholder="${placeholder}">
                     </div> 
                     <div class="url input-container">
                         <span class="error"></span>
-                        <input value="${debbugUrls[z]}" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem">
+                        <input value="${debbugUrls[z]}" type="text" onkeyup="inputUrlCheck(this)" placeholder="URL da imagem">
                     </div> 
                 </div>`
             }
@@ -297,9 +297,11 @@ function goToNextPage(){
                 renderCreateLevelsForm(Number(quantityLevels.value));
                 textTop.innerHTML = TOP_TEXTS.CREATE_QUESTIONS;
                 openSubscreen(SUBSCREENS.CREATE_QUESTIONS);
+            } else {
+                alert("Preencha todos os espaços corretamente antes de prosseguir.");
             }
-            return;
-        } 
+
+        } else
 
         if (current.subscreen === SUBSCREENS.CREATE_QUESTIONS) {
 
@@ -346,10 +348,11 @@ function goToNextPage(){
             if (isValid){
                 textTop.innerHTML = TOP_TEXTS.CREATE_LEVELS;
                 openSubscreen(SUBSCREENS.CREATE_LEVELS);
+            } else {
+                alert("Preencha todos os espaços corretamente antes de prosseguir.");
             }
 
-            return;
-        }
+        } else
 
         if (current.subscreen === SUBSCREENS.CREATE_LEVELS) {
 
@@ -382,8 +385,9 @@ function goToNextPage(){
 
             if (!hasLevelZero) {alert("Pelo menos 1 nível precisa ter porcentagem 0");}
 
-            if (isValid){ postQuizz(); }
-            return;
+
+            isValid ? postQuizz() : alert("Preencha todos os espaços corretamente antes de prosseguir");
+                 
         }
     }
 }

@@ -27,7 +27,6 @@
                         <button class="create-quiz" onclick="goToCreateQuizz()">Criar Quizz</button>
                 </div>
             </section>
-
             <section class="all-quizzes">
                 <h1>Todos os Quizzes</h1>
                 <ul></ul>
@@ -56,22 +55,22 @@
                     <div class="form">
                         <div class="title input-container">
                             <span class="error"></span>
-                            <input type="text" onblur="inputMinLengthCheck(this, 20);" maxlength="65" placeholder="Título do seu quizz">
+                            <input type="text" onkeyup="inputMinLengthCheck(this, 20);" maxlength="65" placeholder="Título do seu quizz">
                         </div> 
 
                         <div class="url input-container">
                             <span class="error"></span>
-                            <input type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem do seu quizz">
+                            <input type="text" onkeyup="inputUrlCheck(this)" placeholder="URL da imagem do seu quizz">
                         </div> 
 
                         <div class="quantity-questions input-container">
                             <span class="error"></span>
-                            <input type="number" onblur="inputNumberCheck(this, 3, 10);" maxlength="2" placeholder="Quantidade de perguntas do quizz">
+                            <input type="number" onkeyup="inputNumberCheck(this, 3, 10);" maxlength="2" placeholder="Quantidade de perguntas do quizz">
                         </div> 
 
                         <div class="quantity-levels input-container">
                             <span class="error"></span>
-                            <input type="number" onblur="inputNumberCheck(this, 2, 10);" maxlength="2"  placeholder="Quantidade de níveis do quizz">
+                            <input type="number" onkeyup="inputNumberCheck(this, 2, 10);" maxlength="2"  placeholder="Quantidade de níveis do quizz">
                         </div> 
                     </div>
                 </div>
