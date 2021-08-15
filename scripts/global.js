@@ -31,10 +31,14 @@ function closeAllSubscreens(){
     document.querySelectorAll(".subscreen").forEach(screen => screen.classList.add("hidden"));
 }
 
-function scrollToView(view){
+function scrollToView(view, extra){
+    console.log("scrolling to")
+    console.log(view)
     //CALCULA A ALTURA DO HEADER PARA NÃO DEIXAR PARTE DA VIEW ESCONDIDA ATRÁS DELE
     const headerHeight = document.querySelector("header").clientHeight;
-    document.documentElement.scrollTop += view.getBoundingClientRect().top - headerHeight;
+    let yPosition = view.getBoundingClientRect().top - headerHeight;
+    if (extra !== undefined) { yPosition -= extra}
+    document.documentElement.scrollTop +=  yPosition;
 }
 
 function scrollToPageTop(){

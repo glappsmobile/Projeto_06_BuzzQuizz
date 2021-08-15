@@ -8,6 +8,43 @@ const TOP_TEXTS = {
     CREATE_SUCCESS: "Seu quizz está pronto!"
 }
 
+const uncollapseInvalidInputParents = () => {
+  /*  document.querySelectorAll(".invalid").forEach((input) => {
+        const collapsableItem = input.parentElement.parentElement.parentElement.parentElement;
+        console.log("----")
+
+        if (collapsableItem !== undefined && collapsableItem !== null) {
+             collapsableItem.classList.remove("collapsed"); 
+             collapsableItem.classList.add("uncollapsable"); 
+
+        }
+    });*/
+
+    document.querySelectorAll(".collapsable,.uncollapsable").forEach(question => {
+        if (!!question.querySelector(".invalid")) {
+            question.classList.remove("collapsed"); 
+            question.classList.remove("collapsable"); 
+            question.classList.add("uncollapsable"); 
+        } else {
+            question.classList.add("collapsed"); 
+            question.classList.add("collapsable"); 
+            question.classList.remove("uncollapsable"); 
+        }
+    });
+}
+
+const nextPageError = () => {
+    alert("Preencha todos os espaços corretamente antes de prosseguir.");
+    uncollapseInvalidInputParents();
+    scrollToSelector(".uncollapsable");
+}
+
+
+const scrollToSelector = (selector) => {
+    const element = document.querySelector(selector);
+    if (element !== null) {scrollToView(element)}
+}
+
 function setInputError(input, errorMessage){
     let parent = input.parentElement;
     let span = parent.querySelector(`span.error`);
@@ -80,12 +117,11 @@ function goToQuizzList(){
     getQuizzes();
 }
 
-function collapse(element){
-    element.classList.add("collapsed")
+const collapse = (element) => {
+    if (element.classList.contains("collapsable")) { element.classList.add("collapsed") };
 }
 
 const collapseParent = (child) =>{
-    console.log(child)
     collapse(child.parentElement.parentElement.parentElement);
 }
 
@@ -94,7 +130,7 @@ function uncollapse(element){
     view = listItem;
     const kind = listItem.classList[0];
     const siblings = document.querySelectorAll(`.${kind}`);
-    siblings.forEach(sibling => sibling.classList.add("collapsed"));
+    siblings.forEach(sibling => collapse(sibling));
     listItem.classList.remove("collapsed");
     scrollToView(listItem);
 }
@@ -108,7 +144,7 @@ function renderCreateLevelsForm(quantityLevels){
         let visibility = (i === 1) ?  "" : "collapsed";
 
         list.innerHTML += `
-        <li class="level ${visibility}">
+        <li class="level collapsable ${visibility}">
             <div class="holder" onclick="uncollapse(this)">
                 <span> Nível ${i}</span>
                 <img src="assets/icon-create.png"/>
@@ -116,7 +152,7 @@ function renderCreateLevelsForm(quantityLevels){
             <div class="body">
             <div class="container-list-name">
                 <h2>Nível ${i}</h2>
-            <ion-button title="Minimizar" onClick="collapseParent(this)">
+            <ion-button class="btn-collapse" title="Minimizar" onClick="collapseParent(this)">
                 <ion-icon name="chevron-down-outline"></ion-icon>
             </ion-button>
             </div>
@@ -186,7 +222,7 @@ function renderCreateQuestionForm(quantityQuestions){
         debbugUrls.sort(() => Math.random() - 0.5);
 
         htmlText += `
-        <li class="question ${visibility}">
+        <li class="question collapsable ${visibility}">
             <div class="holder" onclick="uncollapse(this)">
                 <span> Pergunta ${i}</span>
                 <img src="assets/icon-create.png"/>
@@ -194,7 +230,7 @@ function renderCreateQuestionForm(quantityQuestions){
             <div class="body">
                 <div class="container-list-name">
                 <h2>Pergunta ${i}</h2>
-                <ion-button title="Minimizar" onClick="collapseParent(this)">
+                <ion-button class="btn-collapse" title="Minimizar" onClick="collapseParent(this)">
                     <ion-icon name="chevron-down-outline"></ion-icon>
                 </ion-button>
                 </div>
@@ -235,7 +271,6 @@ function renderCreateQuestionForm(quantityQuestions){
         </li>`;
     }
     list.innerHTML += htmlText;
-
 }
 
 function postQuizz(){
@@ -298,7 +333,7 @@ function goToNextPage(){
                 textTop.innerHTML = TOP_TEXTS.CREATE_QUESTIONS;
                 openSubscreen(SUBSCREENS.CREATE_QUESTIONS);
             } else {
-                alert("Preencha todos os espaços corretamente antes de prosseguir.");
+                nextPageError();
             }
 
         } else
@@ -349,7 +384,7 @@ function goToNextPage(){
                 textTop.innerHTML = TOP_TEXTS.CREATE_LEVELS;
                 openSubscreen(SUBSCREENS.CREATE_LEVELS);
             } else {
-                alert("Preencha todos os espaços corretamente antes de prosseguir.");
+                nextPageError()
             }
 
         } else
@@ -386,7 +421,11 @@ function goToNextPage(){
             if (!hasLevelZero) {alert("Pelo menos 1 nível precisa ter porcentagem 0");}
 
 
-            isValid ? postQuizz() : alert("Preencha todos os espaços corretamente antes de prosseguir");
+            if (isValid) {
+                postQuizz()
+            } else {
+                nextPageError()
+            }
                  
         }
     }

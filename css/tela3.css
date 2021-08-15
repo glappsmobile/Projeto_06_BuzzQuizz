@@ -221,6 +221,11 @@ input.invalid,textarea.invalid{
     padding-bottom: 0;
 }
 
+.screen-quizz-create li.uncollapsable .btn-collapse {
+    display: none;
+}
+
+
 .screen-quizz-create li {
     padding-bottom: 27px;
     margin-bottom: 24px;
