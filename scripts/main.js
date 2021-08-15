@@ -18,6 +18,11 @@ const current = {
     subscreen: ""
 }
 
+const CONFIG = {
+    MAX_RETRY: 3,
+    DELAY_RETRY: 1000
+}
+
 let quizzes;
 let thisQuizz = [];
 let retry = 0;
@@ -82,13 +87,30 @@ function isHexColorBright(color){
         return brightness > 210;
 }
 
+const StringUtils = {
+    isBlank: string => (!string || string.replace(/ /g, "").length === 0)
+}
+
+const ajaxRetry = (retryFunction, param, errorMessage) => {
+    if (retry >= CONFIG.MAX_RETRY){
+        retry = 0;
+        console.log()
+        if (!StringUtils.isBlank(errorMessage)) {alert(errorMessage)}
+    } else {
+        setTimeout(retryFunction, CONFIG.DELAY_RETRY, param);
+        retry++;
+    }
+}
+
 function openQuizz(element) {
     const promise = axios.get(`${API_URL}/${element.id}`)
     .then(response => {
+        retry = 0;
         openScreen(SCREENS.QUIZZ_QUESTIONS); 
         thisQuizz = response.data;
-        renderQuestions() 
-    });
+        renderQuestions();
+    })
+    .catch(error => ajaxRetry(openQuizz, element, "Não foi possível carregar este quizz, tente novamente mais tarde."));
 }
 
 function initialConfig(){
