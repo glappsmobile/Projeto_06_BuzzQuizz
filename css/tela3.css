@@ -172,6 +172,7 @@ input.invalid,textarea.invalid{
 }
 
 .screen-quizz-create .holder span{
+    font-weight: bold;
     font-size: 20px;
 }
 

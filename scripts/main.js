@@ -55,7 +55,7 @@ function openScreen(classIdentifier){
     const screen = document.querySelector(`.${classIdentifier}`);
 
     if (screen !== null){ 
-        closeAllScreens()
+        closeAllScreens();
         current.screen = classIdentifier;
         screen.classList.remove("hidden");
         scrollToPageTop();
@@ -104,7 +104,6 @@ const StringUtils = {
 const ajaxRetry = (retryFunction, param, errorMessage) => {
     if (retry >= CONFIG.MAX_RETRY){
         retry = 0;
-        console.log()
         if (!StringUtils.isBlank(errorMessage)) {alert(errorMessage)}
     } else {
         setTimeout(retryFunction, CONFIG.DELAY_RETRY, param);

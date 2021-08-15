@@ -43,7 +43,6 @@ function renderQuizzes() {
 
 function loadQuizzes(object) {
     quizzes = object.data;
-
     renderQuizzes();
 }
 

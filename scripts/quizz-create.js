@@ -1,5 +1,6 @@
 let quizzInCreation = {}
 const SHOW_ERROR = true;
+const NOTHING = undefined;
 
 const TOP_TEXTS = {
     CREATE_BASIC: "Comece pelo começo",
@@ -300,7 +301,11 @@ const postQuizzSuccess = (response) => {
 function postQuizz(){
     axios.post(API_URL, quizzInCreation)
     .then(postQuizzSuccess)
-    .catch(error => console.error(error)); 
+   // .catch(error => console.error(error)); 
+    .catch(error => ajaxRetry(
+        postQuizz,
+        NOTHING,
+        "Ocorreu um erro ao finalizar o quizz."));
 }
 
 function goToNextPage(){
