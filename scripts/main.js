@@ -91,10 +91,6 @@ function openQuizz(element) {
     });
 }
 
-function onLoad(){
-    initialConfig();
-}
-
 function initialConfig(){
     getQuizzes();
 }
