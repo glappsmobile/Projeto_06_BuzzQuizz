@@ -269,6 +269,7 @@ function renderCreateQuestionForm(quantityQuestions){
 }
 
 const postQuizzSuccess = (response) => {
+    retry = 0;
     const textTop = document.querySelector(`.${SCREENS.CREATE_QUIZZ} .title h1`);
 
     const currentId = response.data.id;
@@ -301,11 +302,7 @@ const postQuizzSuccess = (response) => {
 function postQuizz(){
     axios.post(API_URL, quizzInCreation)
     .then(postQuizzSuccess)
-   // .catch(error => console.error(error)); 
-    .catch(error => ajaxRetry(
-        postQuizz,
-        NOTHING,
-        "Ocorreu um erro ao finalizar o quizz."));
+    .catch(error => ajaxRetry(postQuizz, () => alert(ERROR_MESSAGE.POST_QUIZZ)));
 }
 
 function goToNextPage(){

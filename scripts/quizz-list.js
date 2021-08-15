@@ -47,7 +47,10 @@ function loadQuizzes(object) {
 }
 
 function getQuizzes() {
-    const promise = axios.get(API_URL);
-
-    promise.then(loadQuizzes);
+    axios.get(API_URL)
+    .then(response => {
+        retry = 0;
+        loadQuizzes(response);
+    })
+    .catch(error => ajaxRetry(getQuizzes));
 }

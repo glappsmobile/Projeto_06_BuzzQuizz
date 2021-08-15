@@ -1,4 +1,4 @@
-const API_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v3/buzzquizz/quizzes";
+let API_URL = "https://mock-api.bootcamp.respondeai.com.br/api/v3/buzzquizz/quizzes";
 
 const SCREENS = {
     QUIZZ_LIST: "screen-quizz-list",
@@ -18,11 +18,18 @@ const current = {
     subscreen: ""
 }
 
-const CONFIG = {
-    MAX_RETRY: 3,
-    DELAY_RETRY: 1000
+const ERROR_MESSAGE = {
+    OPEN_QUIZZ: "Não foi possível carregar este quizz, tente novamente mais tarde.",
+    POST_QUIZZ: "Ocorreu um erro ao finalizar o quizz."
 }
 
+const RETRY_CONFIG = {
+    MAX: 3,
+    DELAY: 1000
+}
+
+const PERSISTENT = true;
+let intervalGetQuizz;
 let quizzes;
 let thisQuizz = [];
 let retry = 0;
@@ -52,6 +59,7 @@ function scrollToPageTop(){
 }
 
 function openScreen(classIdentifier){
+    clearGetQuizzInterval();
     const screen = document.querySelector(`.${classIdentifier}`);
 
     if (screen !== null){ 
@@ -101,25 +109,38 @@ const StringUtils = {
     isBlank: string => (!string || string.replace(/ /g, "").length === 0)
 }
 
-const ajaxRetry = (retryFunction, param, errorMessage) => {
-    if (retry >= CONFIG.MAX_RETRY){
+const clearGetQuizzInterval = () => {
+    if (intervalGetQuizz !== undefined){
+        clearInterval(intervalGetQuizz);
+        intervalGetQuizz = undefined;
+    }
+}
+
+const clearMain = () => {
+    retry = 0;
+    clearGetQuizzInterval();
+}
+
+const ajaxRetry = (retryFunction, errorFunction, ...args) => {
+
+    if (retry >= RETRY_CONFIG.MAX){
         retry = 0;
-        if (!StringUtils.isBlank(errorMessage)) {alert(errorMessage)}
+        if (errorFunction !== undefined) {errorFunction()}
     } else {
-        setTimeout(retryFunction, CONFIG.DELAY_RETRY, param);
+        setTimeout(retryFunction, RETRY_CONFIG.DELAY, ...args);
         retry++;
     }
 }
 
 function openQuizz(element) {
-    const promise = axios.get(`${API_URL}/${element.id}`)
+    axios.get(`${API_URL}/${element.id}`)
     .then(response => {
         retry = 0;
         openScreen(SCREENS.QUIZZ_QUESTIONS); 
         thisQuizz = response.data;
         renderQuestions();
     })
-    .catch(error => ajaxRetry(openQuizz, element, "Não foi possível carregar este quizz, tente novamente mais tarde."));
+    .catch(error => ajaxRetry(openQuizz, () => alert(ERROR_MESSAGE.OPEN_QUIZZ), element));
 }
 
 function initialConfig(){
