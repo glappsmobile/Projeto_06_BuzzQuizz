@@ -110,16 +110,6 @@ function inputHexColorCheck(input, showError){
     }
 }
 
-function goToCreateQuizz(){
-    openScreen(SCREENS.CREATE_QUIZZ);
-    openSubscreen(SUBSCREENS.CREATE_BASIC);
-}
-
-function goToQuizzList(){
-    openScreen(SCREENS.QUIZZ_LIST);
-    getQuizzes();
-}
-
 const collapse = (element) => {
     if (element.classList.contains("collapsable")) { element.classList.add("collapsed") };
 }

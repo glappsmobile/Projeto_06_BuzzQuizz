@@ -77,6 +77,16 @@ function randomSorter(){
     return Math.random() - 0.5;
 }
 
+function goToCreateQuizz(){
+    openScreen(SCREENS.CREATE_QUIZZ);
+    openSubscreen(SUBSCREENS.CREATE_BASIC);
+}
+
+function goToQuizzList(){
+    thisQuizz = {}
+    openScreen(SCREENS.QUIZZ_LIST);
+    getQuizzes();
+}
 
 function isHexColorBright(color){
         const hex = color.replace('#', '');
