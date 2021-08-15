@@ -80,6 +80,15 @@ function goToQuizzList(){
     getQuizzes();
 }
 
+function collapse(element){
+    element.classList.add("collapsed")
+}
+
+const collapseParent = (child) =>{
+    console.log(child)
+    collapse(child.parentElement.parentElement.parentElement);
+}
+
 function uncollapse(element){
     const listItem = element.parentElement;
     view = listItem;
@@ -105,9 +114,14 @@ function renderCreateLevelsForm(quantityLevels){
                 <img src="assets/icon-create.png"/>
             </div>
             <div class="body">
-                <h2>Nível ${i}</h2>
+            <div class="container-list-name">
+            <h2>Nível ${i}</h2>
+            <ion-button title="Minimizar" onClick="collapseParent(this)">
+                <ion-icon name="chevron-down-outline"></ion-icon>
+            </ion-button>
+            </div>
                 <div class="input-group no-margin-top main">
-            
+        
                     <div class="title input-container">
                         <span class="error"></span>
                         <input value="Titulo do Level ${i}" onblur="inputMinLengthCheck(this, 10);" type="text" placeholder="Título do nível">
@@ -160,9 +174,8 @@ function renderCreateQuestionForm(quantityQuestions){
         "https://pbs.twimg.com/media/DcEH61AW4AALYjD.jpg",
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKzUJPsSI5eJ4p6feonHRREJOunD-8o2eFzHr6Yq-t3Nt9YXbU-f_zQ7ry7DOfwT3Mvs&usqp=CAU",
         "https://www.petlove.com.br/dicas/wp-content/uploads/2014/07/pinscher2-1280x720.jpg",
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dnz_OBrmFirA&psig=AOvVaw0z3clgH0xt36lSzb4GTp26&ust=1629057571025000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCOjOv8GmsfICFQAAAAAdAAAAABAO",
+        "https://i.ytimg.com/vi/nz_OBrmFirA/maxresdefault.jpg",
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjVxMnEVS1mY2EFkaNzLN00jrNeVNsY0DJqnlR9CtarHKn6jwsCfgbvwM9IOXi98S4A28&usqp=CAU"
-        
     ];
 
     const randomColor = () => '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
@@ -179,7 +192,12 @@ function renderCreateQuestionForm(quantityQuestions){
                 <img src="assets/icon-create.png"/>
             </div>
             <div class="body">
+                <div class="container-list-name">
                 <h2>Pergunta ${i}</h2>
+                <ion-button title="Minimizar" onClick="collapseParent(this)">
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                </ion-button>
+                </div>
                 <div class="input-group no-margin-top main">
                     <div class="text input-container">
                         <span class="error"></span>
@@ -201,16 +219,16 @@ function renderCreateQuestionForm(quantityQuestions){
                 label = (z === 1) ? "<h2>Respostas incorretas</h2>" : label;
 
                 htmlText += `${label}
-                    <div class="input-group ${marginClass} ${answerClass}">
-                        <div class="text input-container">
-                            <span class="error"></span>
-                            <input value="${placeholder}" type="text" onblur="inputMinLengthCheck(this, 1);" placeholder="${placeholder}">
-                        </div> 
-                        <div class="url input-container">
-                            <span class="error"></span>
-                            <input value="${debbugUrls[z]}" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem">
-                        </div> 
-                    </div>`
+                <div class="input-group ${marginClass} ${answerClass}">
+                    <div class="text input-container">
+                        <span class="error"></span>
+                        <input value="${placeholder}" type="text" onblur="inputMinLengthCheck(this, 1);" placeholder="${placeholder}">
+                    </div> 
+                    <div class="url input-container">
+                        <span class="error"></span>
+                        <input value="${debbugUrls[z]}" type="text" onblur="inputUrlCheck(this)" placeholder="URL da imagem">
+                    </div> 
+                </div>`
             }
            htmlText += `
             </div>

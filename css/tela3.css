@@ -186,6 +186,31 @@ input.invalid,textarea.invalid{
     width: 100%;
 }
 
+.screen-quizz-create .container-list-name {
+    margin-top: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #000000;
+    font-size: 24px;
+}
+
+.screen-quizz-create .container-list-name h2 {
+    padding-top: 0;
+}
+
+.screen-quizz-create .container-list-name ion-icon {
+    pointer-events: none;
+}
+
+.screen-quizz-create .container-list-name ion-button {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .screen-quizz-create li.collapsed .body {
     display: none;
@@ -194,7 +219,6 @@ input.invalid,textarea.invalid{
 .screen-quizz-create li.collapsed {
     margin-bottom: 22px;
     padding-bottom: 0;
-
 }
 
 .screen-quizz-create li {
