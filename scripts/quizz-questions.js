@@ -25,7 +25,7 @@ const renderQuizzResult = () => {
     <div class="question result">
         <div class="title white">${getRate()}% de acerto: ${level.title}</div>
         <div class="result-box"> 
-        <img src="${level.image}" />
+        <img src="${level.image}" alt="Imagem ${level.title}" />
         <p>${level.text}</p>
         </div>
     </div>
@@ -99,10 +99,10 @@ function renderQuestions(){
         <li class="question">
             <div class="title" style="color: ${textColor}; background-color: ${question.color}">${question.title}</div>
             <ul class="options">`;
-        question.answers.forEach( answer => { htmlList += 
+        question.answers.forEach( (answer, i) => { htmlList += 
                 `<li class="option" onclick="correctQuestion(this, ${indexQuestion})">
                     <div class="option-img">
-                        <img src="${answer.image}" />
+                        <img src="${answer.image}" alt="Alternativa ${i}"/>
                     </div>
                     <span>${answer.text}</span>
                 </li>`;});
