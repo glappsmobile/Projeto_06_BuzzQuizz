@@ -214,6 +214,7 @@ function renderCreateQuestionForm(quantityQuestions){
     for (let i = 1; i <= quantityQuestions; i++) {
 
         const visibility = (i === 1) ?  "" : "collapsed";
+
         debbugUrls.sort(() => Math.random() - 0.5);
 
         htmlText += `
@@ -242,9 +243,10 @@ function renderCreateQuestionForm(quantityQuestions){
 
             for(let z = 0; z < quantityAnswers;z++){
                 
+                const opcional = (z > 1) ? "(opcional)" : "";
                 const placeholder = (z === 0) ? "Resposta correta" : `Resposta incorreta ${z}`;
                 const answerClass = (z === 0) ? "right-answer" : `wrong-answer-${z}`;
-                const marginClass = (z === 0 || z === 1) ? "no-margin-top" : "";
+                const marginClass = (z <=  1) ? "no-margin-top" : "";
                 let label = "";
                 label = (z === 0) ? "<h2>Resposta correta</h2>" : label;
                 label = (z === 1) ? "<h2>Respostas incorretas</h2>" : label;
@@ -253,7 +255,7 @@ function renderCreateQuestionForm(quantityQuestions){
                 <div class="input-group ${marginClass} ${answerClass}">
                     <div class="text input-container">
                         <span class="error"></span>
-                        <input value="${placeholder}" type="text" onkeyup="inputMinLengthCheck(this, 1);" placeholder="${placeholder}">
+                        <input value="${placeholder}" type="text" onkeyup="inputMinLengthCheck(this, 1);" placeholder="${placeholder} ${opcional}">
                     </div> 
                     <div class="url input-container">
                         <span class="error"></span>
@@ -304,6 +306,14 @@ function postQuizz(){
     .then(postQuizzSuccess)
     .catch(error => ajaxRetry(postQuizz, () => alert(ERROR_MESSAGE.POST_QUIZZ)));
 }
+
+const removeErrorIfEmpty = (answerInput, UrlInput) => {
+    if(answerInput.value.length + UrlInput.value.length === 0){
+        setInputError(answerInput, false);
+        setInputError(UrlInput, false);
+    }
+}
+
 
 function goToNextPage(){
     const screen = document.querySelector(`.${current.screen}`);
@@ -366,16 +376,25 @@ function goToNextPage(){
                 inputMinLengthCheck(wrongText3, 1, SHOW_ERROR);
                 inputUrlCheck(wrongUrl3, SHOW_ERROR);
 
+                removeErrorIfEmpty(wrongText1, wrongUrl1);
+                removeErrorIfEmpty(wrongText2, wrongUrl2);
+                removeErrorIfEmpty(wrongText3, wrongUrl3);
+
+                answers =  [
+                    {text: rightText.value, image: rightUrl.value, isCorrectAnswer: true},
+                    {text: wrongText1.value, image: wrongUrl1.value, isCorrectAnswer: false},
+                    {text: wrongText2.value, image: wrongUrl2.value, isCorrectAnswer: false},
+                    {text: wrongText3.value, image: wrongUrl3.value, isCorrectAnswer: false},
+                ];
+
+                answers = answers.filter(answer => answer.text !== "" && answer.image !== "");
+
                 quizzInCreation.questions[i] = {
                     title: text.value,
-                    color: color.value,
-                    answers: [
-                        {text: rightText.value, image: rightUrl.value, isCorrectAnswer: true},
-                        {text: wrongText1.value, image: wrongUrl1.value, isCorrectAnswer: false},
-                        {text: wrongText2.value, image: wrongUrl2.value, isCorrectAnswer: false},
-                        {text: wrongText3.value, image: wrongUrl3.value, isCorrectAnswer: false},
-                    ]
+                    color: color.value,     
                 }
+
+                quizzInCreation.questions[i].answers = answers;
             });
 
             const isValid = subscreen.querySelectorAll("input.invalid").length === 0;
