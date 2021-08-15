@@ -5,6 +5,12 @@ const isQuizzFinished = () => getTotalAnswered() === thisQuizz.questions.length;
 const getRate = () => Number(((rightAnswers/thisQuizz.questions.length)*100).toFixed());
 const getContrastColor = (hexColor) => (isHexColorBright(hexColor)) ? "#000000" : "#FFFFFF";
 
+function sortQuizzQuestions(){
+    thisQuizz.questions.forEach((question, i) => {
+        thisQuizz.questions[i].answers.sort(randomSorter);
+    });
+}
+
 function removeResult() {
     const screen = document.querySelector(`.${SCREENS.QUIZZ_QUESTIONS}`);
     const result = screen.querySelector("div.result");
