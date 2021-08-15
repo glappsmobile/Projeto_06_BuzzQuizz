@@ -87,6 +87,16 @@ function inputMinLengthCheck(input, minLength, showError){
     }
 }
 
+function inputEmptyCheck(input, showError){
+    if (input.value.length === 0) { 
+        if (showError) { setInputError(input, `O texto não pode estar vazio`); }
+        return false;
+    } else {
+        setInputError(input, false);
+        return true;
+    }
+}
+
 function inputUrlCheck(input, showError){
     const matchpattern = /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gm;
 
@@ -254,7 +264,7 @@ function renderCreateQuestionForm(quantityQuestions){
                 htmlText += `${label}
                 <div class="input-group ${marginClass} ${answerClass}">
                     <div class="text input-container">
-                        <input value="${placeholder}" type="text" onkeyup="inputMinLengthCheck(this, 1);" placeholder="${placeholder} ${opcional}">
+                        <input value="${placeholder}" type="text" onkeyup="inputEmptyCheck(this);" placeholder="${placeholder} ${opcional}">
                         <span class="error"></span>
                     </div> 
                     <div class="url input-container">                       
@@ -367,13 +377,13 @@ function goToNextPage(){
 
                 inputMinLengthCheck(text, 20, SHOW_ERROR);
                 inputHexColorCheck(color, SHOW_ERROR);
-                inputMinLengthCheck(rightText, 1, SHOW_ERROR);
+                inputEmptyCheck(rightText, SHOW_ERROR);
                 inputUrlCheck(rightUrl, SHOW_ERROR);
-                inputMinLengthCheck(wrongText1, 1, SHOW_ERROR);
+                inputEmptyCheck(wrongText1, SHOW_ERROR);
                 inputUrlCheck(wrongUrl1, SHOW_ERROR);
-                inputMinLengthCheck(wrongText2, 1, SHOW_ERROR);
+                inputEmptyCheck(wrongText2, SHOW_ERROR);
                 inputUrlCheck(wrongUrl2, SHOW_ERROR);
-                inputMinLengthCheck(wrongText3, 1, SHOW_ERROR);
+                inputEmptyCheck(wrongText3, SHOW_ERROR);
                 inputUrlCheck(wrongUrl3, SHOW_ERROR);
 
                 removeErrorIfEmpty(wrongText1, wrongUrl1);
