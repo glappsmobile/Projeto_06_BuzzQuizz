@@ -23,8 +23,9 @@ const current = {
 }
 
 const ERROR_MESSAGE = {
-    OPEN_QUIZZ: "Não foi possível carregar este quizz, tente novamente mais tarde.",
-    POST_QUIZZ: "Ocorreu um erro ao finalizar o quizz."
+    OPEN_QUIZZ: "Não foi possível carregar este quizz.",
+    POST_QUIZZ: "Ocorreu um erro ao finalizar o quizz.",
+    EDIT_QUIZZ: "Não foi possível editar este quizz."
 }
 
 const RETRY_CONFIG = {
@@ -32,8 +33,8 @@ const RETRY_CONFIG = {
     DELAY: 1000
 }
 
-const PERSISTENT = true;
-let intervalGetQuizz;
+let isEditing = false;
+let currentKey = "";
 let quizzes;
 let thisQuizz = [];
 let retry = 0;
@@ -61,7 +62,6 @@ function scrollToPageTop(){
 }
 
 function openScreen(classIdentifier){
-    clearGetQuizzInterval();
     const screen = document.querySelector(`.${classIdentifier}`);
 
     if (screen !== null){ 
@@ -87,9 +87,39 @@ function randomSorter(){
     return Math.random() - 0.5;
 }
 
-function goToCreateQuizz(){
-    openScreen(SCREENS.CREATE_QUIZZ);
-    openSubscreen(SUBSCREENS.CREATE_BASIC);
+const fillBasicForm = () => {
+    const subscreen = document.querySelector(`.${SUBSCREENS.CREATE_BASIC}`);
+    const title = subscreen.querySelector(".title input");
+    const url = subscreen.querySelector(".url input");
+    const quantityQuestions = subscreen.querySelector(".quantity-questions input");
+    const quantityLevels = subscreen.querySelector(".quantity-levels input"); 
+
+    const questionValue = quizzInCreation.questions.length; 
+    const levelValue = quizzInCreation.levels.length; 
+
+    title.value = quizzInCreation.title;
+    url.value = quizzInCreation.image;
+    quantityQuestions.value = questionValue;
+    quantityLevels.value = levelValue;
+}
+
+function goToCreateQuizz(id, key){
+
+    if (id !== undefined){
+        isEditing = true;
+        currentKey = key;
+        axios.get(`${API_URL}/${id}`)
+        .then(response => {
+            quizzInCreation = response.data;
+            fillBasicForm();
+            openScreen(SCREENS.CREATE_QUIZZ);
+            openSubscreen(SUBSCREENS.CREATE_BASIC);
+        })
+        .catch(error => alert(ERROR_MESSAGE.EDIT_QUIZZ));
+    } else {
+        openScreen(SCREENS.CREATE_QUIZZ);
+        openSubscreen(SUBSCREENS.CREATE_BASIC);
+    }
 }
 
 function goToQuizzList(){
@@ -111,21 +141,7 @@ const StringUtils = {
     isBlank: string => (!string || string.replace(/ /g, "").length === 0)
 }
 
-const clearGetQuizzInterval = () => {
-    if (intervalGetQuizz !== undefined){
-        clearInterval(intervalGetQuizz);
-        intervalGetQuizz = undefined;
-    }
-}
-
-const clearMain = () => {
-    retry = 0;
-    clearGetQuizzInterval();
-}
-
 const ajaxRetry = (retryFunction, errorFunction, ...args) => {
-    console.log("retrying")
-    console.log(retry, RETRY_CONFIG.MAX)
     if (retry >= RETRY_CONFIG.MAX){
         retry = 0;
         if (errorFunction !== undefined) {errorFunction()}
@@ -135,15 +151,15 @@ const ajaxRetry = (retryFunction, errorFunction, ...args) => {
     }
 }
 
-function openQuizz(element) {
-    axios.get(`${API_URL}/${element.id}`)
+function openQuizz(id) {
+    axios.get(`${API_URL}/${id}`)
     .then(response => {
-        retry = 0;
         openScreen(SCREENS.QUIZZ_QUESTIONS); 
         thisQuizz = response.data;
         renderQuestions();
+        retry = 0;
     })
-    .catch(error => ajaxRetry(openQuizz, () => alert(ERROR_MESSAGE.OPEN_QUIZZ), element));
+    .catch(error => ajaxRetry(openQuizz, () => alert(ERROR_MESSAGE.OPEN_QUIZZ), id));
 }
 
 function initialConfig(){

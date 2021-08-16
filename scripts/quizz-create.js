@@ -138,6 +138,98 @@ function uncollapse(element){
     scrollToView(listItem);
 }
 
+function renderCreateQuestionForm(quantityQuestions){
+    const subscreen = document.querySelector(`.${SUBSCREENS.CREATE_QUESTIONS}`);
+    const list = subscreen.querySelector("ul.questions");
+    list.innerHTML = "";
+    const quantityAnswers = 4;
+    let htmlText = "";
+
+    let debbugUrls = [
+        "https://st2.depositphotos.com/3378121/5471/i/600/depositphotos_54718145-stock-photo-chihuahua-dog-crying-in-the.jpg",
+        "https://c8.alamy.com/comp/E929Y0/smiling-chihuahua-E929Y0.jpg",
+        "https://i.pinimg.com/736x/1a/58/7c/1a587cc5882f332996d3c67920fafec8.jpg",
+        "https://i.ytimg.com/vi/uWovLuMp98I/hqdefault.jpg",
+        "https://pbs.twimg.com/media/EejvK3FUMAU56Tu.jpg",
+        "https://m.media-amazon.com/images/I/517wI4E-ytL._AC_SS450_.jpg",
+        "https://i.redd.it/uo2zpzx2xoc21.jpg",
+        "https://pics.me.me/thumb_smiling-chihuahua-meme-wiring-schematic-diagram-51871003.png",
+        "https://i.pinimg.com/originals/6f/71/b8/6f71b810c740d95886dfd0ec4fa55981.jpg",
+        "https://static1.bigstockphoto.com/1/1/2/large1500/211917823.jpg",
+        "https://i.pinimg.com/originals/42/46/50/424650ab47aebd927712b29d41ae77d9.jpg",
+        "https://i.pinimg.com/originals/cd/38/92/cd38924769a63697af2938f9512a54d7.jpg",
+        "https://i.pinimg.com/474x/a7/9b/11/a79b115ed535bed2227cf28c3cbdc4b1.jpg",
+        "https://i.pinimg.com/originals/06/9a/70/069a708356a6a8f83e197f16651136bf.jpg",
+        "https://pbs.twimg.com/media/DcEHtFIX4AAs1O5.jpg",
+        "https://pbs.twimg.com/profile_images/1281037224264577029/qJLHPDLD_400x400.jpg",
+        "https://pbs.twimg.com/media/DcEH61AW4AALYjD.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKzUJPsSI5eJ4p6feonHRREJOunD-8o2eFzHr6Yq-t3Nt9YXbU-f_zQ7ry7DOfwT3Mvs&usqp=CAU",
+        "https://www.petlove.com.br/dicas/wp-content/uploads/2014/07/pinscher2-1280x720.jpg",
+        "https://i.ytimg.com/vi/nz_OBrmFirA/maxresdefault.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjVxMnEVS1mY2EFkaNzLN00jrNeVNsY0DJqnlR9CtarHKn6jwsCfgbvwM9IOXi98S4A28&usqp=CAU"
+    ];
+
+    const randomColor = () => '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+
+    for (let i = 1; i <= quantityQuestions; i++) {
+
+        const visibility = (i === 1) ?  "" : "collapsed";
+        debbugUrls.sort(() => Math.random() - 0.5)
+        const urls = (isEditing)? quizzInCreation.questions[i-1].answers.map(answer => answer.image) : debbugUrls;
+
+        htmlText += `
+        <li class="question collapsable ${visibility}">
+            <div class="holder" onclick="uncollapse(this)">
+                <span> Pergunta ${i}</span>
+                <img src="assets/icon-create.png"/>
+            </div>
+            <div class="body">
+                <div class="container-list-name">
+                <h2>Pergunta ${i}</h2>
+                <ion-button class="btn-collapse" title="Minimizar" onClick="collapseParent(this)">
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                </ion-button>
+                </div>
+                <div class="input-group no-margin-top main">
+                    <div class="text input-container">
+                        <input maxlength="65" value="EXAMPLE TITLE ${i} EXAMPLE TITLE ${i}" type="text" onkeyup="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
+                        <span class="error"></span>
+                    </div> 
+                    <div class="color input-container">                                             
+                        <input maxlength="7" value="${randomColor()}" type="text" onclick="inputHexColorCheck(this)" placeholder="Cor de fundo da pergunta">
+                        <span class="error"></span>
+                    </div> 
+                </div>`;
+
+            for(let z = 0; z < quantityAnswers;z++){
+                
+                const opcional = (z > 1) ? "(opcional)" : "";
+                const placeholder = (z === 0) ? "Resposta correta" : `Resposta incorreta ${z}`;
+                const answerClass = (z === 0) ? "right-answer" : `wrong-answer-${z}`;
+                const marginClass = (z <=  1) ? "no-margin-top" : "";
+                let label = "";
+                label = (z === 0) ? "<h2>Resposta correta</h2>" : label;
+                label = (z === 1) ? "<h2>Respostas incorretas</h2>" : label;
+
+                htmlText += `${label}
+                <div class="input-group ${marginClass} ${answerClass}">
+                    <div class="text input-container">
+                        <input maxlength="65" value="${placeholder}" type="text" onkeyup="inputEmptyCheck(this);" placeholder="${placeholder} ${opcional}">
+                        <span class="error"></span>
+                    </div> 
+                    <div class="url input-container">                       
+                        <input maxlength="255" value="${urls[z]}" type="text" onkeyup="inputUrlCheck(this)" placeholder="URL da imagem">
+                        <span class="error"></span>
+                    </div> 
+                </div>`
+            }
+           htmlText += `
+            </div>
+        </li>`;
+    }
+    list.innerHTML += htmlText;
+}
+
 function renderCreateLevelsForm(quantityLevels){
     const subscreen = document.querySelector(`.${SUBSCREENS.CREATE_LEVELS}`);
     const list = subscreen.querySelector("ul.levels");
@@ -187,97 +279,6 @@ function renderCreateLevelsForm(quantityLevels){
     }
 }
 
-function renderCreateQuestionForm(quantityQuestions){
-    const subscreen = document.querySelector(`.${SUBSCREENS.CREATE_QUESTIONS}`);
-    const list = subscreen.querySelector("ul.questions");
-    list.innerHTML = "";
-    const quantityAnswers = 4;
-    let htmlText = "";
-
-    let debbugUrls = [
-        "https://st2.depositphotos.com/3378121/5471/i/600/depositphotos_54718145-stock-photo-chihuahua-dog-crying-in-the.jpg",
-        "https://c8.alamy.com/comp/E929Y0/smiling-chihuahua-E929Y0.jpg",
-        "https://i.pinimg.com/736x/1a/58/7c/1a587cc5882f332996d3c67920fafec8.jpg",
-        "https://i.ytimg.com/vi/uWovLuMp98I/hqdefault.jpg",
-        "https://pbs.twimg.com/media/EejvK3FUMAU56Tu.jpg",
-        "https://m.media-amazon.com/images/I/517wI4E-ytL._AC_SS450_.jpg",
-        "https://i.redd.it/uo2zpzx2xoc21.jpg",
-        "https://pics.me.me/thumb_smiling-chihuahua-meme-wiring-schematic-diagram-51871003.png",
-        "https://i.pinimg.com/originals/6f/71/b8/6f71b810c740d95886dfd0ec4fa55981.jpg",
-        "https://static1.bigstockphoto.com/1/1/2/large1500/211917823.jpg",
-        "https://i.pinimg.com/originals/42/46/50/424650ab47aebd927712b29d41ae77d9.jpg",
-        "https://i.pinimg.com/originals/cd/38/92/cd38924769a63697af2938f9512a54d7.jpg",
-        "https://i.pinimg.com/474x/a7/9b/11/a79b115ed535bed2227cf28c3cbdc4b1.jpg",
-        "https://i.pinimg.com/originals/06/9a/70/069a708356a6a8f83e197f16651136bf.jpg",
-        "https://pbs.twimg.com/media/DcEHtFIX4AAs1O5.jpg",
-        "https://pbs.twimg.com/profile_images/1281037224264577029/qJLHPDLD_400x400.jpg",
-        "https://pbs.twimg.com/media/DcEH61AW4AALYjD.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKzUJPsSI5eJ4p6feonHRREJOunD-8o2eFzHr6Yq-t3Nt9YXbU-f_zQ7ry7DOfwT3Mvs&usqp=CAU",
-        "https://www.petlove.com.br/dicas/wp-content/uploads/2014/07/pinscher2-1280x720.jpg",
-        "https://i.ytimg.com/vi/nz_OBrmFirA/maxresdefault.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjVxMnEVS1mY2EFkaNzLN00jrNeVNsY0DJqnlR9CtarHKn6jwsCfgbvwM9IOXi98S4A28&usqp=CAU"
-    ];
-
-    const randomColor = () => '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
-
-    for (let i = 1; i <= quantityQuestions; i++) {
-
-        const visibility = (i === 1) ?  "" : "collapsed";
-
-        debbugUrls.sort(() => Math.random() - 0.5);
-
-        htmlText += `
-        <li class="question collapsable ${visibility}">
-            <div class="holder" onclick="uncollapse(this)">
-                <span> Pergunta ${i}</span>
-                <img src="assets/icon-create.png"/>
-            </div>
-            <div class="body">
-                <div class="container-list-name">
-                <h2>Pergunta ${i}</h2>
-                <ion-button class="btn-collapse" title="Minimizar" onClick="collapseParent(this)">
-                    <ion-icon name="chevron-down-outline"></ion-icon>
-                </ion-button>
-                </div>
-                <div class="input-group no-margin-top main">
-                    <div class="text input-container">
-                        <input maxlength="65" value="EXAMPLE TITLE ${i} EXAMPLE TITLE ${i}" type="text" onkeyup="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
-                        <span class="error"></span>
-                    </div> 
-                    <div class="color input-container">                                             
-                        <input maxlength="7" value="${randomColor()}" type="text" onclick="inputHexColorCheck(this)" placeholder="Cor de fundo da pergunta">
-                        <span class="error"></span>
-                    </div> 
-                </div>`;
-
-            for(let z = 0; z < quantityAnswers;z++){
-                
-                const opcional = (z > 1) ? "(opcional)" : "";
-                const placeholder = (z === 0) ? "Resposta correta" : `Resposta incorreta ${z}`;
-                const answerClass = (z === 0) ? "right-answer" : `wrong-answer-${z}`;
-                const marginClass = (z <=  1) ? "no-margin-top" : "";
-                let label = "";
-                label = (z === 0) ? "<h2>Resposta correta</h2>" : label;
-                label = (z === 1) ? "<h2>Respostas incorretas</h2>" : label;
-
-                htmlText += `${label}
-                <div class="input-group ${marginClass} ${answerClass}">
-                    <div class="text input-container">
-                        <input maxlength="65" value="${placeholder}" type="text" onkeyup="inputEmptyCheck(this);" placeholder="${placeholder} ${opcional}">
-                        <span class="error"></span>
-                    </div> 
-                    <div class="url input-container">                       
-                        <input maxlength="255" value="${debbugUrls[z]}" type="text" onkeyup="inputUrlCheck(this)" placeholder="URL da imagem">
-                        <span class="error"></span>
-                    </div> 
-                </div>`
-            }
-           htmlText += `
-            </div>
-        </li>`;
-    }
-    list.innerHTML += htmlText;
-}
 
 const postQuizzSuccess = (response) => {
     
@@ -311,9 +312,22 @@ const postQuizzSuccess = (response) => {
 }
 
 function postQuizz(){
-    axios.post(API_URL, quizzInCreation)
-    .then(postQuizzSuccess)
-    .catch(error => ajaxRetry(postQuizz, () => alert(ERROR_MESSAGE.POST_QUIZZ)));
+    if (isEditing){
+        const header = {}
+        header.headers = {}
+        header.headers["Secret-Key"] = currentKey;
+        const id = quizzInCreation.id;
+        delete quizzInCreation.id;
+
+        axios.put(`${API_URL}/${id}`, quizzInCreation, header)
+        .then(postQuizzSuccess)
+        .catch(error => alert(ERROR_MESSAGE.EDIT_QUIZZ));
+    } else {
+        axios.post(API_URL, quizzInCreation)
+        .then(postQuizzSuccess)
+        .catch(error => alert(ERROR_MESSAGE.POST_QUIZZ));
+    }
+
 }
 
 const removeErrorIfEmpty = (answerInput, UrlInput) => {

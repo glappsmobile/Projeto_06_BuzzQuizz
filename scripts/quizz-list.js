@@ -11,7 +11,7 @@ const deleteQuizz = (name, id, key) => {
 }
 
 function renderQuizzes() {
-    const myQuizzes = JSON.parse(localStorage.getItem("quizz"));
+    let myQuizzes = JSON.parse(localStorage.getItem("quizz"));
     const created = document.querySelector(".screen-quizz-list .created-quizzes");
     const all_quizzes_list = document.querySelector(".screen-quizz-list .all-quizzes ul");
     let hasMyQuizz = false;
@@ -34,27 +34,26 @@ function renderQuizzes() {
         const id = quizz.id;
         const image = quizz.image;
         const title = quizz.title;
-
         if (hasKey){
             hasMyQuizz = true;
             created_list.innerHTML += `
                 <li class="quizz">
                     <img src="${image}" />
-                    <div class="gradient" id="${id}" onclick="openQuizz(this);"></div>
+                    <div class="gradient" onclick="openQuizz(${id});"></div>
                     <span class="title">${title}</span>
                     <div class="container-options">
-                        <ion-button title="Editar">
+                        <ion-button title="Editar" onClick="goToCreateQuizz('${id}', '${hasKey.key}')">
                             <ion-icon name="create-outline"></ion-icon>
                         </ion-button>
-                        <ion-button title="Deletar" onclick="deleteQuizz('${title}', '${id}', '${hasKey.key}')">
-                            <ion-icon name="trash-outline"></ion-icon>
+                        <ion-button title="Deletar" onClick="deleteQuizz('${title}', '${id}', '${hasKey.key}')">
+                            <ion-icon name="trash-outline" ></ion-icon>
                         </ion-button>
                     </div>
                 </li>`
         } else {
 
             all_quizzes_list.innerHTML += `
-                <li class="quizz" id="${id}" onclick="openQuizz(this);">
+                <li class="quizz" onclick="openQuizz(${id});">
                     <img src="${image}" />
                     <div class="gradient"></div>
                     <span class="title">${title}</span>
@@ -83,7 +82,8 @@ function getQuizzes() {
         retry = 0;
     })
     .catch(error => {
-        console.log(error.response);
+        console.log(error);
+
         ajaxRetry(getQuizzes);
     })
 }
