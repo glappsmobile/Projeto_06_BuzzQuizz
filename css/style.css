@@ -202,4 +202,8 @@ main section .quizz .title {
     main .created-quizzes .new-quizz {
         width: 100%;
     }
+
+    .quizz .container-options {
+        opacity: 100;
+    }
 }
