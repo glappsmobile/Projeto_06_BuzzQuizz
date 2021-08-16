@@ -1,7 +1,3 @@
-body {
-    background-color: #E5E5E5;
-}
-
 html {
     scroll-behavior: smooth;
 }
@@ -259,11 +255,11 @@ input.invalid,textarea.invalid{
     width: 95%;
     max-width: 500px;
     height: 250px;
+    border-radius: 5px;
 }
 
 .screen-quizz-create .subscreen-create-success .container-img img {
     width: 100%;
-    border-radius: 5px;
 }
 
 .screen-quizz-create .gradient {
