@@ -29,7 +29,9 @@ function renderQuizzes() {
         created.innerHTML = `
             <div class="new-quizz">
                 <h1>Seus Quizzes</h1>
-                <ion-icon name="add-circle" onclick="goToCreateQuizz()"></ion-icon>
+                <ion-button title="Criar novo quizz" onclick="goToCreateQuizz()">
+                    <ion-icon name="add-circle" "></ion-icon>
+                </ion-button>
             </div>
             <ul></ul>`;
 
