@@ -254,10 +254,11 @@ input.invalid,textarea.invalid{
 .screen-quizz-create .subscreen-create-success .container-img {
     position: relative;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    overflow: hidden;
     width: 95%;
     max-width: 500px;
+    height: 250px;
 }
 
 .screen-quizz-create .subscreen-create-success .container-img img {
