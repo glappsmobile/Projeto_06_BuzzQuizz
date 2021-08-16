@@ -143,7 +143,19 @@ span.back {
     }
 
     .screen-quizz-questions .question .options .option {
-        width: 45%;
+        height: 150px;
+        width: 49%;
+    }
+
+    .screen-quizz-questions .question .option-img {
+        background-color: black;
+        height: 70%;
+        margin-bottom: 5px;
+    }
+
+    .screen-quizz-questions .question .options .option span {
+        font-size: 13px;
+        height: 20%;
     }
 
     .screen-quizz-questions .result .title {
