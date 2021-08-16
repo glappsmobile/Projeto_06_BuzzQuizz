@@ -108,7 +108,7 @@ function renderQuestions(){
         question.answers.forEach( (answer, i) => { htmlList += 
                 `<li class="option" onclick="correctQuestion(this, ${indexQuestion})">
                     <div class="option-img">
-                        <img src="${answer.image}" alt="Alternativa ${i}"/>
+                        <img src="${answer.image}" alt="Alternativa ${i+1}"/>
                     </div>
                     <span>${answer.text}</span>
                 </li>`;});

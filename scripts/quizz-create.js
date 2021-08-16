@@ -145,37 +145,14 @@ function renderCreateQuestionForm(quantityQuestions){
     const quantityAnswers = 4;
     let htmlText = "";
 
-    let debbugUrls = [
-        "https://st2.depositphotos.com/3378121/5471/i/600/depositphotos_54718145-stock-photo-chihuahua-dog-crying-in-the.jpg",
-        "https://c8.alamy.com/comp/E929Y0/smiling-chihuahua-E929Y0.jpg",
-        "https://i.pinimg.com/736x/1a/58/7c/1a587cc5882f332996d3c67920fafec8.jpg",
-        "https://i.ytimg.com/vi/uWovLuMp98I/hqdefault.jpg",
-        "https://pbs.twimg.com/media/EejvK3FUMAU56Tu.jpg",
-        "https://m.media-amazon.com/images/I/517wI4E-ytL._AC_SS450_.jpg",
-        "https://i.redd.it/uo2zpzx2xoc21.jpg",
-        "https://pics.me.me/thumb_smiling-chihuahua-meme-wiring-schematic-diagram-51871003.png",
-        "https://i.pinimg.com/originals/6f/71/b8/6f71b810c740d95886dfd0ec4fa55981.jpg",
-        "https://static1.bigstockphoto.com/1/1/2/large1500/211917823.jpg",
-        "https://i.pinimg.com/originals/42/46/50/424650ab47aebd927712b29d41ae77d9.jpg",
-        "https://i.pinimg.com/originals/cd/38/92/cd38924769a63697af2938f9512a54d7.jpg",
-        "https://i.pinimg.com/474x/a7/9b/11/a79b115ed535bed2227cf28c3cbdc4b1.jpg",
-        "https://i.pinimg.com/originals/06/9a/70/069a708356a6a8f83e197f16651136bf.jpg",
-        "https://pbs.twimg.com/media/DcEHtFIX4AAs1O5.jpg",
-        "https://pbs.twimg.com/profile_images/1281037224264577029/qJLHPDLD_400x400.jpg",
-        "https://pbs.twimg.com/media/DcEH61AW4AALYjD.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKzUJPsSI5eJ4p6feonHRREJOunD-8o2eFzHr6Yq-t3Nt9YXbU-f_zQ7ry7DOfwT3Mvs&usqp=CAU",
-        "https://www.petlove.com.br/dicas/wp-content/uploads/2014/07/pinscher2-1280x720.jpg",
-        "https://i.ytimg.com/vi/nz_OBrmFirA/maxresdefault.jpg",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjVxMnEVS1mY2EFkaNzLN00jrNeVNsY0DJqnlR9CtarHKn6jwsCfgbvwM9IOXi98S4A28&usqp=CAU"
-    ];
-
     const randomColor = () => '#'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
 
     for (let i = 1; i <= quantityQuestions; i++) {
 
         const visibility = (i === 1) ?  "" : "collapsed";
-        debbugUrls.sort(() => Math.random() - 0.5)
-        const urls = (isEditing)? quizzInCreation.questions[i-1].answers.map(answer => answer.image) : debbugUrls;
+        let title = (isEditing && quizzInCreation.questions[i-1] !== undefined) ? quizzInCreation.questions[i-1].title : "";
+        let color = (isEditing && quizzInCreation.questions[i-1] !== undefined) ? quizzInCreation.questions[i-1].color : "";
+    
 
         htmlText += `
         <li class="question collapsable ${visibility}">
@@ -192,18 +169,29 @@ function renderCreateQuestionForm(quantityQuestions){
                 </div>
                 <div class="input-group no-margin-top main">
                     <div class="text input-container">
-                        <input maxlength="65" value="EXAMPLE TITLE ${i} EXAMPLE TITLE ${i}" type="text" onkeyup="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
+                        <input maxlength="65" value="${title}" type="text" onkeyup="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
                         <span class="error"></span>
                     </div> 
                     <div class="color input-container">                                             
-                        <input maxlength="7" value="${randomColor()}" type="text" onclick="inputHexColorCheck(this)" placeholder="Cor de fundo da pergunta">
+                        <input maxlength="7" value="${color}" type="text" onclick="inputHexColorCheck(this)" placeholder="Cor de fundo da pergunta">
                         <span class="error"></span>
                     </div> 
                 </div>`;
 
             for(let z = 0; z < quantityAnswers;z++){
-                
-                const opcional = (z > 1) ? "(opcional)" : "";
+
+                let url = "";
+                let text = ""; 
+
+                if(isEditing && quizzInCreation.questions[i-1] !== undefined){
+                    url = quizzInCreation.questions[i-1].answers.map(answer => answer.image)[z];
+                    text = quizzInCreation.questions[i-1].answers.map(answer => answer.text)[z]
+                }
+
+                url = (!url)? "" : url;
+                text = (!text)? "" : text; 
+
+                const optional = (z > 1) ? "(opcional)" : "";
                 const placeholder = (z === 0) ? "Resposta correta" : `Resposta incorreta ${z}`;
                 const answerClass = (z === 0) ? "right-answer" : `wrong-answer-${z}`;
                 const marginClass = (z <=  1) ? "no-margin-top" : "";
@@ -214,11 +202,11 @@ function renderCreateQuestionForm(quantityQuestions){
                 htmlText += `${label}
                 <div class="input-group ${marginClass} ${answerClass}">
                     <div class="text input-container">
-                        <input maxlength="65" value="${placeholder}" type="text" onkeyup="inputEmptyCheck(this);" placeholder="${placeholder} ${opcional}">
+                        <input maxlength="65" value="${text}" type="text" onkeyup="inputEmptyCheck(this);" placeholder="${placeholder} ${optional}">
                         <span class="error"></span>
                     </div> 
                     <div class="url input-container">                       
-                        <input maxlength="255" value="${urls[z]}" type="text" onkeyup="inputUrlCheck(this)" placeholder="URL da imagem">
+                        <input maxlength="255" value="${url}" type="text" onkeyup="inputUrlCheck(this)" placeholder="URL da imagem">
                         <span class="error"></span>
                     </div> 
                 </div>`
@@ -239,6 +227,23 @@ function renderCreateLevelsForm(quantityLevels){
 
         let visibility = (i === 1) ?  "" : "collapsed";
 
+        let title = "";
+        let minPercentage = "";
+        let url = "";
+        let description = "";
+
+        if (isEditing && quizzInCreation.levels[i-1] !== undefined){
+            title = quizzInCreation.levels[i-1].title;
+            minPercentage =  quizzInCreation.levels[i-1].minValue;
+            url = quizzInCreation.levels[i-1].image;
+            description = quizzInCreation.levels[i-1].text;
+        }
+
+        title = (!title)? "" : title;
+        minPercentage = (minPercentage === undefined)? "" : minPercentage; 
+        url = (!url)? "" : url;
+        description = (!description)? "" : description; 
+
         list.innerHTML += `
         <li class="level collapsable ${visibility}">
             <div class="holder" onclick="uncollapse(this)">
@@ -255,22 +260,22 @@ function renderCreateLevelsForm(quantityLevels){
                 <div class="input-group no-margin-top main">
         
                     <div class="title input-container">                      
-                        <input value="Titulo do Level ${i}" maxlength="65" onkeyup="inputMinLengthCheck(this, 10);" type="text" placeholder="Título do nível">
+                        <input value="${title}" maxlength="65" onkeyup="inputMinLengthCheck(this, 10);" type="text" placeholder="Título do nível">
                         <span class="error"></span>
                     </div> 
             
                     <div class="min-percentage input-container">                       
-                        <input value="${(i-1)*10}" maxlength="3" onkeyup="inputNumberCheck(this, 0, 100);" type="number" placeholder="% de acerto mínima">
+                        <input value="${minPercentage}" maxlength="3" onkeyup="inputNumberCheck(this, 0, 100);" type="number" placeholder="% de acerto mínima">
                         <span class="error"></span>
                     </div> 
             
                     <div class="url input-container">                       
-                        <input maxlength="255" value="http://photos.demandstudios.com/getty/article/76/222/200281068-001.jpg" onkeyup="inputUrlCheck(this)" type="text" placeholder="URL da imagem do nível">
+                        <input maxlength="255" value="${url}" onkeyup="inputUrlCheck(this)" type="text" placeholder="URL da imagem do nível">
                         <span class="error"></span>
                     </div> 
             
                     <div class="description input-container">                      
-                        <textarea maxlength="1000" type="text" placeholder="Descrição do nível">UMA DESCRIÇÃO BEM LONGA COM BEEM MAIS DE 30 CARACTERES, TEM UNS QUARENTA OU SETENTA</textarea>
+                        <textarea maxlength="1000" type="text" placeholder="Descrição do nível">${description}</textarea>
                         <span class="error"></span>
                     </div> 
                 </div>
@@ -291,7 +296,7 @@ const postQuizzSuccess = (response) => {
         arrQuizzes = JSON.parse(previousQuizzes);
     }
 
-    arrQuizzes.push(currentQuizz);
+    if(arrQuizzes.find((element) => element.id === currentQuizz.id) === undefined) { arrQuizzes.push(currentQuizz); }
     localStorage.setItem("quizz", JSON.stringify(arrQuizzes));
     
     textTop.innerHTML = TOP_TEXTS.CREATE_SUCCESS;
@@ -304,7 +309,7 @@ const postQuizzSuccess = (response) => {
             <div class="gradient"></div>
             <span>${quizzInCreation.title}</span>
         </div>
-        <button class="continue" id="${currentQuizz.id}" onclick="openQuizz(this);">Acessar Quizz</button>
+        <button class="continue" onclick="openQuizz(${currentQuizz.id});">Acessar Quizz</button>
         <span onclick="goToQuizzList()" class="back">Voltar pra home</span>`;
     
     clearApp();

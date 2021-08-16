@@ -82,8 +82,6 @@ function getQuizzes() {
         retry = 0;
     })
     .catch(error => {
-        console.log(error);
-
         ajaxRetry(getQuizzes);
     })
 }

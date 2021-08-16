@@ -117,6 +117,7 @@ function goToCreateQuizz(id, key){
         })
         .catch(error => alert(ERROR_MESSAGE.EDIT_QUIZZ));
     } else {
+        isEditing = false;
         openScreen(SCREENS.CREATE_QUIZZ);
         openSubscreen(SUBSCREENS.CREATE_BASIC);
     }
