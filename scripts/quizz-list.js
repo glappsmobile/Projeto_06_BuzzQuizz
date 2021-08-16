@@ -45,7 +45,9 @@ function renderQuizzes() {
     quizzes.forEach((quizz, i) => {
         const hasKey = myQuizzes.find(element => {
             if (element.id === quizz.id) {
-                my_quizz_quantity++;
+                if (my_quizz_quantity !== undefined) {
+                    my_quizz_quatity++;
+                }
                 return true;
             }
         });
