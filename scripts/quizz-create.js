@@ -313,10 +313,12 @@ const postQuizzSuccess = (response) => {
         <span onclick="goToQuizzList()" class="back">Voltar pra home</span>`;
     
     clearApp();
-    retry = 0;
+    loading.stop();
 }
 
 function postQuizz(){
+    loading.start();
+    
     if (isEditing){
         const header = {}
         header.headers = {}
@@ -325,12 +327,18 @@ function postQuizz(){
         delete quizzInCreation.id;
 
         axios.put(`${API_URL}/${id}`, quizzInCreation, header)
-        .then(postQuizzSuccess)
-        .catch(error => alert(ERROR_MESSAGE.EDIT_QUIZZ));
+        .then(response => postQuizzSuccess(response))
+        .catch(error => {
+            alert(ERROR_MESSAGE.EDIT_QUIZZ)
+            loading.stop();
+        });
     } else {
         axios.post(API_URL, quizzInCreation)
         .then(postQuizzSuccess)
-        .catch(error => alert(ERROR_MESSAGE.POST_QUIZZ));
+        .catch(error => {
+            alert(ERROR_MESSAGE.POST_QUIZZ);
+            loading.stop();
+        });
     }
 
 }

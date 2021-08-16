@@ -39,6 +39,18 @@ let quizzes;
 let thisQuizz = [];
 let retry = 0;
 
+const loading = {
+    start: () => {
+        loading.toggle(false);
+    },
+    stop: () => {
+        loading.toggle(true);
+    },
+    toggle: (isLoading) =>{ 
+        document.querySelector(".container-loading").classList.toggle("hidden", isLoading);
+    }   
+}
+
 function closeAllScreens(){
     current.screen = "";
     document.querySelectorAll(".screen").forEach(screen => screen.classList.add("hidden"));
@@ -108,14 +120,19 @@ function goToCreateQuizz(id, key){
     if (id !== undefined){
         isEditing = true;
         currentKey = key;
+        loading.start();
         axios.get(`${API_URL}/${id}`)
         .then(response => {
             quizzInCreation = response.data;
             fillBasicForm();
             openScreen(SCREENS.CREATE_QUIZZ);
             openSubscreen(SUBSCREENS.CREATE_BASIC);
+            loading.stop();
         })
-        .catch(error => alert(ERROR_MESSAGE.EDIT_QUIZZ));
+        .catch(error => {
+            alert(ERROR_MESSAGE.EDIT_QUIZZ);
+            loading.stop();
+        });
     } else {
         isEditing = false;
         openScreen(SCREENS.CREATE_QUIZZ);
@@ -153,14 +170,18 @@ const ajaxRetry = (retryFunction, errorFunction, ...args) => {
 }
 
 function openQuizz(id) {
+    loading.start();
     axios.get(`${API_URL}/${id}`)
     .then(response => {
         openScreen(SCREENS.QUIZZ_QUESTIONS); 
         thisQuizz = response.data;
         renderQuestions();
-        retry = 0;
+        loading.stop();
     })
-    .catch(error => ajaxRetry(openQuizz, () => alert(ERROR_MESSAGE.OPEN_QUIZZ), id));
+    .catch(error => {
+        alert(ERROR_MESSAGE.OPEN_QUIZZ);
+        loading.stop();
+    });
 }
 
 function initialConfig(){

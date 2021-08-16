@@ -66,12 +66,12 @@
                         </div> 
 
                         <div class="quantity-questions input-container">
-                            <input type="number" onkeyup="inputNumberCheck(this, 3, 10);" maxlength="2" placeholder="Quantidade de perguntas do quizz">
+                            <input type="number" onkeyup="inputNumberCheck(this, 3, 10);" maxlength="2" placeholder="Quantidade de perguntas do quizz (3 - 10)">
                             <span class="error"></span>
                         </div> 
 
                         <div class="quantity-levels input-container">
-                            <input type="number" onkeyup="inputNumberCheck(this, 2, 10);" maxlength="2"  placeholder="Quantidade de níveis do quizz">
+                            <input type="number" onkeyup="inputNumberCheck(this, 2, 10);" maxlength="2"  placeholder="Quantidade de níveis do quizz (2 - 10)">
                             <span class="error"></span>
                         </div> 
                     </div>
@@ -113,6 +113,14 @@
                 <span onclick="goToQuizzList()" class="back">Voltar pra home</span>
             </section>
         </section>
+
+        <!-- Loading -->
+        <div class="container-loading">
+            <div>
+                <img src="assets/loading.gif">
+                <span>Carregando</span>
+            </div>
+        </div>
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

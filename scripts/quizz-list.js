@@ -2,13 +2,21 @@ const deleteQuizz = (name, id, key) => {
     const header = {}
     header.headers = {}
     header.headers["Secret-Key"] = key;
-
+    loading.start();
     if (confirm(`Tem Certeza que deseja deletar o quizz "${name}"?`)){
         axios.delete(`${API_URL}/${id}`, header)
-        .then(getQuizzes)
-        .catch(error => alert("Erro ao deletar quizz."))
+        .then(response => {
+            getQuizzes(response);
+            loading.stop();
+        })
+        .catch(error => {
+            alert("Erro ao deletar quizz.");
+            loading.stop();
+        });
     }
 }
+
+
 
 function renderQuizzes() {
     let myQuizzes = JSON.parse(localStorage.getItem("quizz"));
@@ -16,6 +24,7 @@ function renderQuizzes() {
     const all_quizzes_list = document.querySelector(".screen-quizz-list .all-quizzes ul");
     let hasMyQuizz = false;
     let created_list;
+    
     if ( myQuizzes !== null ) {
         created.innerHTML = `
             <div class="new-quizz">
@@ -76,12 +85,16 @@ function loadQuizzes(object) {
 }
 
 function getQuizzes() {
+    loading.start();
+
     axios.get(API_URL)
     .then(response => {
+        loading.stop();
         loadQuizzes(response);
         retry = 0;
     })
     .catch(error => {
+        loading.stop();
         ajaxRetry(getQuizzes);
     })
 }
