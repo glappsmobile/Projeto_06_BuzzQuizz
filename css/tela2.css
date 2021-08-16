@@ -54,6 +54,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .screen-quizz-questions .question .title.black {
