@@ -15,12 +15,15 @@ function renderQuizzes() {
         id_created = [];
     }
 
+    let created_quantity = 0;
+
     for ( let i = 0; i < quizzes.length; i++ ) {
         let is_created = false;
 
         for ( let j = 0; j < id_created.length; j++ ) {
             if ( quizzes[i].id === id_created[j] ) {
                 is_created = true;
+                created_quantity++;
             }
         }
 
@@ -38,6 +41,13 @@ function renderQuizzes() {
                     <span class="title">${quizzes[i].title}</span>
                 </li>`
         }
+    }
+
+    if (created_quantity === 0) {
+        created.innerHTML = `<div class="no-created-quizz">
+                <span>Não encontramos o seu quizz :(</span>
+                <button class="create-quiz" onclick="goToCreateQuizz()">Criar Quizz</button>
+            </div>`
     }
 }
 
