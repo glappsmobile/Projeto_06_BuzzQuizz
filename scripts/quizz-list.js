@@ -1,50 +1,70 @@
+const deleteQuizz = (name, id, key) => {
+    const header = {}
+    header.headers = {}
+    header.headers["Secret-Key"] = key;
+
+    if (confirm(`Tem Certeza que deseja deletar o quizz "${name}"?`)){
+        axios.delete(`${API_URL}/${id}`, header)
+        .then(getQuizzes)
+        .catch(error => alert("Erro ao deletar quizz."))
+    }
+}
 
 function renderQuizzes() {
-    let id_created = JSON.parse(localStorage.getItem("id"));
-
+    const myQuizzes = JSON.parse(localStorage.getItem("quizz"));
     const created = document.querySelector(".screen-quizz-list .created-quizzes");
-    let created_list;
     const all_quizzes_list = document.querySelector(".screen-quizz-list .all-quizzes ul");
+    let hasMyQuizz = false;
+    let created_list;
+    if ( myQuizzes !== null ) {
+        created.innerHTML = `
+            <div class="new-quizz">
+                <h1>Seus Quizzes</h1>
+                <ion-icon name="add-circle" onclick="goToCreateQuizz()"></ion-icon>
+            </div>
+            <ul></ul>`;
 
-    if ( id_created !== null ) {
-        created.innerHTML = `<div class="new-quizz"><h1>Seus Quizzes</h1><ion-icon name="add-circle" onclick="goToCreateQuizz()"></ion-icon></div><ul></ul>`;
-        
         created_list = created.querySelector("ul");
+    } else {
+        myQuizzes = [];
     }
-    else {
-        id_created = [];
-    }
+    
+    quizzes.forEach((quizz, i) => {
+        const hasKey = myQuizzes.find(element => element.id === quizz.id);
+        const id = quizz.id;
+        const image = quizz.image;
+        const title = quizz.title;
 
-    let created_quantity = 0;
+        if (hasKey){
+            hasMyQuizz = true;
+            created_list.innerHTML += `
+                <li class="quizz">
+                    <img src="${image}" />
+                    <div class="gradient" id="${id}" onclick="openQuizz(this);"></div>
+                    <span class="title">${title}</span>
+                    <div class="container-options">
+                        <ion-button title="Editar">
+                            <ion-icon name="create-outline"></ion-icon>
+                        </ion-button>
+                        <ion-button title="Deletar" onclick="deleteQuizz('${title}', '${id}', '${hasKey.key}')">
+                            <ion-icon name="trash-outline"></ion-icon>
+                        </ion-button>
+                    </div>
+                </li>`
+        } else {
 
-    for ( let i = 0; i < quizzes.length; i++ ) {
-        let is_created = false;
-
-        for ( let j = 0; j < id_created.length; j++ ) {
-            if ( quizzes[i].id === id_created[j] ) {
-                is_created = true;
-                created_quantity++;
-            }
-        }
-
-        if ( is_created ) {
-            created_list.innerHTML += `<li class="quizz" id="${quizzes[i].id}" onclick="openQuizz(this);">
-                    <img src="${quizzes[i].image}" />
+            all_quizzes_list.innerHTML += `
+                <li class="quizz" id="${id}" onclick="openQuizz(this);">
+                    <img src="${image}" />
                     <div class="gradient"></div>
-                    <span class="title">${quizzes[i].title}</span>
+                    <span class="title">${title}</span>
                 </li>`
         }
-        else {
-            all_quizzes_list.innerHTML += `<li class="quizz" id="${quizzes[i].id}" onclick="openQuizz(this);">
-                    <img src="${quizzes[i].image}" />
-                    <div class="gradient"></div>
-                    <span class="title">${quizzes[i].title}</span>
-                </li>`
-        }
-    }
+    });
 
-    if (created_quantity === 0) {
-        created.innerHTML = `<div class="no-created-quizz">
+    if (!hasMyQuizz) {
+        created.innerHTML = `
+            <div class="no-created-quizz">
                 <span>Não encontramos o seu quizz :(</span>
                 <button class="create-quiz" onclick="goToCreateQuizz()">Criar Quizz</button>
             </div>`
@@ -59,8 +79,11 @@ function loadQuizzes(object) {
 function getQuizzes() {
     axios.get(API_URL)
     .then(response => {
-        retry = 0;
         loadQuizzes(response);
+        retry = 0;
     })
-    .catch(error => ajaxRetry(getQuizzes));
+    .catch(error => {
+        console.log(error.response);
+        ajaxRetry(getQuizzes);
+    })
 }

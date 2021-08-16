@@ -66,15 +66,14 @@ function inputNumberCheck(input, min, max, showError){
         return false; 
     }
 
-    if (input.value < min) {
-        input.value = min;
+    if (input.value < min || input.value > max ) {
+        if (showError) { setInputError(input, `O valor deve ser entre ${min} e ${max}`) };
+        return false;
+    } else {
         setInputError(input, "");
-    } else if (input.value > max){
-        input.value = max;
-        setInputError(input, "");
+        return true;
     }
 
-    return true;
 }
 
 function inputMinLengthCheck(input, minLength, showError){
@@ -281,20 +280,19 @@ function renderCreateQuestionForm(quantityQuestions){
 }
 
 const postQuizzSuccess = (response) => {
-    retry = 0;
+    
     const textTop = document.querySelector(`.${SCREENS.CREATE_QUIZZ} .title h1`);
+    const currentQuizz = {id: response.data.id, key: response.data.key }
+    const previousQuizzes = localStorage.getItem("quizz"); 
+    let arrQuizzes = [];
 
-    const currentId = response.data.id;
-    const previousIds = localStorage.getItem("id"); 
-    let arrIds = [];
-
-    if (previousIds !== null && previousIds !== undefined){
-        arrIds = JSON.parse(previousIds);
+    if (previousQuizzes !== null && previousQuizzes !== undefined){
+        arrQuizzes = JSON.parse(previousQuizzes);
     }
 
-    arrIds.push(currentId);
-    localStorage.setItem("id", JSON.stringify(arrIds));
-
+    arrQuizzes.push(currentQuizz);
+    localStorage.setItem("quizz", JSON.stringify(arrQuizzes));
+    
     textTop.innerHTML = TOP_TEXTS.CREATE_SUCCESS;
     openSubscreen(SUBSCREENS.CREATE_SUCCESS);
 
@@ -305,10 +303,11 @@ const postQuizzSuccess = (response) => {
             <div class="gradient"></div>
             <span>${quizzInCreation.title}</span>
         </div>
-        <button class="continue" id="${currentId}" onclick="openQuizz(this);">Acessar Quizz</button>
+        <button class="continue" id="${currentQuizz.id}" onclick="openQuizz(this);">Acessar Quizz</button>
         <span onclick="goToQuizzList()" class="back">Voltar pra home</span>`;
     
     clearApp();
+    retry = 0;
 }
 
 function postQuizz(){

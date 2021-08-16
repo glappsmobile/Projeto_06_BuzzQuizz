@@ -49,8 +49,6 @@ function closeAllSubscreens(){
 }
 
 function scrollToView(view, extra){
-    console.log("scrolling to")
-    console.log(view)
     //CALCULA A ALTURA DO HEADER PARA NÃO DEIXAR PARTE DA VIEW ESCONDIDA ATRÁS DELE
     const headerHeight = document.querySelector("header").clientHeight;
     let yPosition = view.getBoundingClientRect().top - headerHeight;
@@ -126,7 +124,8 @@ const clearMain = () => {
 }
 
 const ajaxRetry = (retryFunction, errorFunction, ...args) => {
-
+    console.log("retrying")
+    console.log(retry, RETRY_CONFIG.MAX)
     if (retry >= RETRY_CONFIG.MAX){
         retry = 0;
         if (errorFunction !== undefined) {errorFunction()}

@@ -126,6 +126,24 @@ main section .quizz .title {
     margin: 0 25px 5px 10px;
 }
 
+.container-options {
+    background-color: #EC362D;
+    border-radius: 10px 0px 0px 11px;
+    width: 43px;
+    height: 87px;
+    color: #FFFFFF;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    right: 0;
+    top: 9px;
+    font-size: 24px;
+    padding: 5px 0;
+    z-index: 3;
+}
+
 .hidden {
     display: none;
 }
