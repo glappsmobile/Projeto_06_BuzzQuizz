@@ -13,6 +13,10 @@ const SUBSCREENS = {
     CREATE_SUCCESS: "subscreen-create-success"
 }
 
+const KEYS = {
+    ENTER: "Enter"
+}
+
 const current = {
     screen: SCREENS.QUIZZ_LIST,
     subscreen: ""

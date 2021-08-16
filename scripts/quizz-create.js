@@ -164,22 +164,22 @@ function renderCreateLevelsForm(quantityLevels){
                 <div class="input-group no-margin-top main">
         
                     <div class="title input-container">                      
-                        <input value="Titulo do Level ${i}" onkeyup="inputMinLengthCheck(this, 10);" type="text" placeholder="Título do nível">
+                        <input value="Titulo do Level ${i}" maxlength="65" onkeyup="inputMinLengthCheck(this, 10);" type="text" placeholder="Título do nível">
                         <span class="error"></span>
                     </div> 
             
                     <div class="min-percentage input-container">                       
-                        <input value="${(i-1)*10}" onkeyup="inputNumberCheck(this, 0, 100);" type="number" placeholder="% de acerto mínima">
+                        <input value="${(i-1)*10}" maxlength="3" onkeyup="inputNumberCheck(this, 0, 100);" type="number" placeholder="% de acerto mínima">
                         <span class="error"></span>
                     </div> 
             
                     <div class="url input-container">                       
-                        <input value="http://photos.demandstudios.com/getty/article/76/222/200281068-001.jpg" onkeyup="inputUrlCheck(this)" type="text" placeholder="URL da imagem do nível">
+                        <input maxlength="255" value="http://photos.demandstudios.com/getty/article/76/222/200281068-001.jpg" onkeyup="inputUrlCheck(this)" type="text" placeholder="URL da imagem do nível">
                         <span class="error"></span>
                     </div> 
             
                     <div class="description input-container">                      
-                        <textarea type="text" placeholder="Descrição do nível">UMA DESCRIÇÃO BEM LONGA COM BEEM MAIS DE 30 CARACTERES, TEM UNS QUARENTA OU SETENTA</textarea>
+                        <textarea maxlength="1000" type="text" placeholder="Descrição do nível">UMA DESCRIÇÃO BEM LONGA COM BEEM MAIS DE 30 CARACTERES, TEM UNS QUARENTA OU SETENTA</textarea>
                         <span class="error"></span>
                     </div> 
                 </div>
@@ -242,11 +242,11 @@ function renderCreateQuestionForm(quantityQuestions){
                 </div>
                 <div class="input-group no-margin-top main">
                     <div class="text input-container">
-                        <input value="EXAMPLE TITLE ${i} EXAMPLE TITLE ${i}" type="text" onkeyup="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
+                        <input maxlength="65" value="EXAMPLE TITLE ${i} EXAMPLE TITLE ${i}" type="text" onkeyup="inputMinLengthCheck(this, 20);" placeholder="Texto da pergunta">
                         <span class="error"></span>
                     </div> 
                     <div class="color input-container">                                             
-                        <input value="${randomColor()}" type="text" onclick="inputHexColorCheck(this)" placeholder="Cor de fundo da pergunta">
+                        <input maxlength="7" value="${randomColor()}" type="text" onclick="inputHexColorCheck(this)" placeholder="Cor de fundo da pergunta">
                         <span class="error"></span>
                     </div> 
                 </div>`;
@@ -264,11 +264,11 @@ function renderCreateQuestionForm(quantityQuestions){
                 htmlText += `${label}
                 <div class="input-group ${marginClass} ${answerClass}">
                     <div class="text input-container">
-                        <input value="${placeholder}" type="text" onkeyup="inputEmptyCheck(this);" placeholder="${placeholder} ${opcional}">
+                        <input maxlength="65" value="${placeholder}" type="text" onkeyup="inputEmptyCheck(this);" placeholder="${placeholder} ${opcional}">
                         <span class="error"></span>
                     </div> 
                     <div class="url input-container">                       
-                        <input value="${debbugUrls[z]}" type="text" onkeyup="inputUrlCheck(this)" placeholder="URL da imagem">
+                        <input maxlength="255" value="${debbugUrls[z]}" type="text" onkeyup="inputUrlCheck(this)" placeholder="URL da imagem">
                         <span class="error"></span>
                     </div> 
                 </div>`
