@@ -102,6 +102,5 @@ function getQuizzes() {
     })
     .catch(error => {
         loading.stop();
-        ajaxRetry(getQuizzes);
     })
 }

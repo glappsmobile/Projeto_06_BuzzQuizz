@@ -79,6 +79,8 @@
 .screen-quizz-questions .question .option-img {
     width: 100%;
     height: 175px;
+    clip:rect(0px,60px,200px,0px);
+
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -87,6 +89,8 @@
 
 .screen-quizz-questions .question .option-img img {
     width: 100%;
+    object-fit: cover;
+
 }
 
 .screen-quizz-questions .question .options .option span {
