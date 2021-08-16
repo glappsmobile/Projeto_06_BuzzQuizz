@@ -150,6 +150,12 @@ main section .quizz .title {
     top: 9px;
     font-size: 24px;
     padding: 5px 0;
+    opacity: 0;
+    transition: 200ms ease-out;
+}
+
+.quizz:hover .container-options {
+    opacity: 100;
 }
 
 .hidden {
@@ -177,7 +183,7 @@ main section .quizz .title {
     font-size: 25px;
 }
 
-.container-loading img{
+.loading-container img{
     width: 100px;
     height: 100px;
     margin-bottom: 24px;
