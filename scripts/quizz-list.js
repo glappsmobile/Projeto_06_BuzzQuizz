@@ -22,10 +22,12 @@ function renderQuizzes() {
     let myQuizzes = JSON.parse(localStorage.getItem("quizz"));
     const created = document.querySelector(".screen-quizz-list .created-quizzes");
     const all_quizzes_list = document.querySelector(".screen-quizz-list .all-quizzes ul");
-    let hasMyQuizz = false;
+    let my_quizz_quatity;
     let created_list;
     
     if ( myQuizzes !== null ) {
+        my_quizz_quatity = 0;
+        
         created.innerHTML = `
             <div class="new-quizz">
                 <h1>Seus Quizzes</h1>
@@ -41,12 +43,16 @@ function renderQuizzes() {
     }
     
     quizzes.forEach((quizz, i) => {
-        const hasKey = myQuizzes.find(element => element.id === quizz.id);
+        const hasKey = myQuizzes.find(element => {
+            if (element.id === quizz.id) {
+                my_quizz_quantity++;
+                return true;
+            }
+        });
         const id = quizz.id;
         const image = quizz.image;
         const title = quizz.title;
         if (hasKey){
-            hasMyQuizz = true;
             created_list.innerHTML += `
                 <li class="quizz">
                     <img src="${image}" />
@@ -62,7 +68,6 @@ function renderQuizzes() {
                     </div>
                 </li>`
         } else {
-
             all_quizzes_list.innerHTML += `
                 <li class="quizz" onclick="openQuizz(${id});">
                     <img src="${image}" />
@@ -72,7 +77,7 @@ function renderQuizzes() {
         }
     });
 
-    if (!hasMyQuizz) {
+    if (my_quizz_quatity === 0) {
         created.innerHTML = `
             <div class="no-created-quizz">
                 <span>Não encontramos o seu quizz :(</span>
