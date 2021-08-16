@@ -49,6 +49,7 @@ function renderQuizzes() {
                 return true;
             }
         });
+
         const id = quizz.id;
         const image = quizz.image;
         const title = quizz.title;
@@ -102,5 +103,6 @@ function getQuizzes() {
     })
     .catch(error => {
         loading.stop();
+        console.log(error)
     })
 }
