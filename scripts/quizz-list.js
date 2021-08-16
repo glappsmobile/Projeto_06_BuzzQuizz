@@ -97,9 +97,8 @@ function getQuizzes() {
 
     axios.get(API_URL)
     .then(response => {
-        loading.stop();
         loadQuizzes(response);
-        retry = 0;
+        loading.stop();
     })
     .catch(error => {
         loading.stop();
